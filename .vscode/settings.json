@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "linkedlists.h": "c",
-        "set.h": "c"
+        "set.h": "c",
+        "DictionaryTests.C": "cpp",
+        "dictionary.h": "c"
     }
 }

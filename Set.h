@@ -11,18 +11,18 @@ typedef struct setTable
 
 typedef struct setNode
 {
-    const char *key;
+    const char* key;
     size_t keyLen;
-    struct setNode *next;
-    struct setNode *prev;
+    struct setNode* next;
+    struct setNode* prev;
 } setNode;
 
 
 
-size_t HashDJB33X(const char *key, const size_t keylen);
-void PrintSet(struct setTable *table);
+size_t HashDJB33X(const char* key, const size_t keylen);
+void PrintSet(struct setTable* table);
 setTable* NewSetTable(const size_t hashmapSize);
-void SetInsert(struct setTable *table, const char *key);
+void SetInsert(struct setTable* table, const char *key);
 setNode* SetSearch(struct setTable* table, const char* key);
 void SetRemove(struct setTable* table, const char* key);
 

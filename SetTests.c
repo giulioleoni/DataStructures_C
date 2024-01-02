@@ -12,7 +12,8 @@ int main(int argc, char** argv)
     const char* string3 = "pizza";
     const char* string5 = "AAAAAA";
 
-
+    printf("Case of an Empty Set\n");
+    SetSearch(table, string1);
 
     SetInsert(table, string0);
     SetInsert(table, string1);
