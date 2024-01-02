@@ -24,6 +24,12 @@ doublyListItem* GetTail(doublyListItem* head)
 
 void PrintDoublyList(doublyListItem* head)
 {
+    if (!head)
+    {
+        printf("The head is NULL\n");
+        return;
+    }
+
     doublyListItem* currentItem = head;
     int index = 0;
     while (currentItem)
@@ -36,6 +42,12 @@ void PrintDoublyList(doublyListItem* head)
 
 void PrintDoublyListReverse(doublyListItem* head)
 {
+    if (!head)
+    {
+        printf("The head is NULL\n");
+        return;
+    }
+    
     doublyListItem* tail = GetTail(head);
 
     int index = 0;
