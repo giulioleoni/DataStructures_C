@@ -28,12 +28,12 @@ void PrintList(listItem* head)
         return;
     }
     
-    listItem* CurrentItem = head;
+    listItem* currentItem = head;
     int index = 0;
-    while (CurrentItem)
+    while (currentItem)
     {
-        printf("Value at index %d: %d\n", index, CurrentItem->value);
-        CurrentItem = CurrentItem->next;
+        printf("Value at index %d: %d\n", index, currentItem->value);
+        currentItem = currentItem->next;
         index++;
     }
 }
@@ -45,13 +45,13 @@ listItem* GetTail(listItem* head)
         return NULL;
     }
 
-    listItem* CurrentItem = head;
+    listItem* currentItem = head;
     listItem* tail = NULL;
     
-    while (CurrentItem)
+    while (currentItem)
     {
-        tail = CurrentItem;
-        CurrentItem = CurrentItem->next;
+        tail = currentItem;
+        currentItem = currentItem->next;
     }
 
     return tail;
@@ -104,11 +104,11 @@ int RemoveValueFromList(listItem** head, int value)
 
     if ((*head)->next)
     {
-        listItem* CurrentItem = *head;
-        while (CurrentItem->next->value != value)
+        listItem* currentItem = *head;
+        while (currentItem->next->value != value)
         {
-            CurrentItem = CurrentItem->next;
-            if (CurrentItem->next == NULL)
+            currentItem = currentItem->next;
+            if (currentItem->next == NULL)
             {
                 printf("\nThis value is not in the list\n");
                 return -1;
@@ -116,10 +116,10 @@ int RemoveValueFromList(listItem** head, int value)
             
         }    
 
-        removedValue = CurrentItem->next->value;
+        removedValue = currentItem->next->value;
 
-        itemToRemove = CurrentItem;
-        CurrentItem->next = CurrentItem->next->next;
+        itemToRemove = currentItem;
+        currentItem->next = currentItem->next->next;
 
         free(itemToRemove);
 
