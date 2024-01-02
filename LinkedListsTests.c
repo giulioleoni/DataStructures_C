@@ -1,5 +1,5 @@
 #include "LinkedLists.h"
-
+// some tests for the principal functionalities
 
 int main(int argc, char** argv)
 {
