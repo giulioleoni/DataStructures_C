@@ -1,7 +1,5 @@
 #include "DoublyLinkedLists.h"
-
-
-// some tests for the principal functionalities
+// some tests for the main functionalities
 
 int main(int argc, char** argv)
 {
