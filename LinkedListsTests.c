@@ -8,14 +8,20 @@ int main(int argc, char** argv)
     listItem* head = NULL;
     int removed = RemoveValueFromList(&head, 3);
     PrintList(head);
-    FreeListMemory(&head);
 
     ListAppend(&head, numbers[0]);
     ListAppend(&head, numbers[1]);
     ListAppend(&head, numbers[2]);
     ListAppend(&head, numbers[3]);
 
-    PrintList(head);   
+    PrintList(head);  
+
+    ReverseList(&head);
+    printf("Reversed list\n");
+    PrintList(head);  
+
+    // back to the original
+    ReverseList(&head);
 
     removed = RemoveValueFromList(&head, 3);
     printf("Removed element: %d\n", removed);         // -1 if the value isn't in the list 

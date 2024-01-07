@@ -14,7 +14,7 @@ listItem* ListAppend(listItem** head, int value);
 listItem* GetTail(listItem* head);
 void PrintList(listItem* head);
 void FreeListMemory(listItem** head);
-
+void ReverseList(listItem** head);
 
 
 

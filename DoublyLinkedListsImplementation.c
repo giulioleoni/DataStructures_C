@@ -181,7 +181,6 @@ int RemoveValueFromDoublyList(doublyListItem** head, int value)
         }
         else
         {
-            // caso in cui la lista ha un elemento e voglio eliminare quell'elemento
             *head = NULL;
         }
         

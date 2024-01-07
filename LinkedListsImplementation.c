@@ -105,20 +105,22 @@ int RemoveValueFromList(listItem** head, int value)
     if ((*head)->next)
     {
         listItem* currentItem = *head;
+
         while (currentItem->next->value != value)
         {
             currentItem = currentItem->next;
+            
             if (currentItem->next == NULL)
             {
                 printf("\nThis value is not in the list\n");
                 return -1;
             }
-            
         }    
 
         removedValue = currentItem->next->value;
 
-        itemToRemove = currentItem;
+        itemToRemove = currentItem->next;
+
         currentItem->next = currentItem->next->next;
 
         free(itemToRemove);
@@ -131,6 +133,21 @@ int RemoveValueFromList(listItem** head, int value)
 
 
 
+void ReverseList(listItem** head)
+{
+    listItem* currentItem = *head;
+    listItem* previousItem = NULL;
+
+    while (currentItem)
+    {
+        listItem* nextItem = currentItem->next;
+        currentItem->next = previousItem;
+        previousItem = currentItem;
+        currentItem = nextItem;
+    }
+    
+    *head = previousItem;
+}
 
 
 
