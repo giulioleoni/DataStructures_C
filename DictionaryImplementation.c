@@ -113,6 +113,7 @@ void DictAddKey(struct dictTable* table, const char* key, const int value)
         if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
             printf("\nFound a matching key, cannot add the new element\n");
+            free(newItem);
             return;
         }
 
