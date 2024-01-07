@@ -104,24 +104,25 @@ void SetInsert(struct setTable* table, const char *key)
         return; 
     }
 
-    struct setNode* new_item = malloc(sizeof(struct setNode));
+    struct setNode* newItem = malloc(sizeof(struct setNode));
 
-    if (!new_item)
+    if (!newItem)
     {
         return;
     }
 
-    new_item->key = key;
-    new_item->keyLen = keyLen;
-    new_item->next = NULL;
+    newItem->key = key;
+    newItem->keyLen = keyLen;
+    newItem->next = NULL;
 
     struct setNode* tail;
 
     while (head)
     {
-        if (new_item->keyLen == head->keyLen && !memcmp(head->key, new_item->key, keyLen))
+        if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
             printf("\nFound a matching key, cannot add the new element\n");
+            free(newItem);
             return;
         }
 
@@ -129,8 +130,8 @@ void SetInsert(struct setTable* table, const char *key)
         head = head->next;
     }
 
-    tail->next = new_item;
-    new_item->prev = tail;
+    tail->next = newItem;
+    newItem->prev = tail;
     return;
 }
 

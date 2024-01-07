@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     SetSearch(table, string1);
     printf("\n");
     
-    printf("searching a set element which is not in the list\n");
+    printf("searching a key which is not in the set\n");
     SetSearch(table, "dcsjn");
     printf("\n");
 
