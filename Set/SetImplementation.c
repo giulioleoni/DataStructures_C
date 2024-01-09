@@ -185,7 +185,7 @@ void SetRemove(struct setTable* table, const char* key)
 
         if (!nodeToRemove->prev)
         {
-            // case node_to_remove is a head
+            // case nodeToRemove is a head
             table->nodes[index] = table->nodes[index]->next;
             if (table->nodes[index])
             {
