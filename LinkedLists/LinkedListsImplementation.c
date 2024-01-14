@@ -17,7 +17,9 @@ void FreeListMemory(listItem** head)
         free(itemToFree);
     }
 
-    printf("Freed memory\n");
+    *head = NULL;
+
+    //printf("Freed memory\n");
 }
 
 void PrintList(listItem* head)
