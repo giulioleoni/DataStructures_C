@@ -46,8 +46,6 @@ int main(int argc, char** argv)
     PrintList(head);  
     printf("\n");
 
-
-
     FreeListMemory(&head);
     
     return 0;

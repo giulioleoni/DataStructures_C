@@ -14,7 +14,7 @@ size_t HashDJB33X(const char* key, const size_t keylen)
 
 void PrintDict(struct dictTable* table)
 {
-    printf("\nPRINTING DICT\n");
+    //printf("\nPRINTING DICT\n");
     for (int i = 0; i < table->hashmapSize; i++)
     {
         if (table->nodes[i])
@@ -38,8 +38,7 @@ void PrintDict(struct dictTable* table)
         }
     } 
 
-    printf("END PRINTING DICT\n\n");
-
+    //printf("END PRINTING DICT\n\n");
 }
 
 dictTable* NewDictTable(const size_t hashmapSize)
