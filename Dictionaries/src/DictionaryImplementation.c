@@ -14,12 +14,11 @@ size_t HashDJB33X(const char* key, const size_t keylen)
 
 void PrintDict(struct dictTable* table)
 {
-    //printf("\nPRINTING DICT\n");
     for (int i = 0; i < table->hashmapSize; i++)
     {
         if (table->nodes[i])
         {
-            printf("%s key with a value of %d at set index [%d]\n", table->nodes[i]->key, table->nodes[i]->value, i);
+            printf("%s key at dict index [%d]\n", table->nodes[i]->key, i);
 
             if (table->nodes[i]->next)
             {
@@ -29,7 +28,7 @@ void PrintDict(struct dictTable* table)
 
                 while (node)
                 {
-                    printf("%s key with a value of %d it the [%d] list at list index {%d}\n", node->key, node->value, i, a);
+                    printf("%s key in the [%d] list at list index {%d}\n", node->key, i, a);
                     
                     node = node->next;
                     a++;
@@ -37,8 +36,6 @@ void PrintDict(struct dictTable* table)
             }   
         }
     } 
-
-    //printf("END PRINTING DICT\n\n");
 }
 
 dictTable* NewDictTable(const size_t hashmapSize)
@@ -64,14 +61,11 @@ dictTable* NewDictTable(const size_t hashmapSize)
 
 
 
-void DictAddKey(struct dictTable* table, const char* key, const int value)
+int DictAddKey(struct dictTable* table, const char* key, void* value)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
-
     const size_t index = hash % table->hashmapSize;
-
-    printf("hash of %s = %llu (index = %llu), keylen = %llu\n", key, hash, index, keyLen);
 
     struct dictNode* head = table->nodes[index];
 
@@ -81,7 +75,8 @@ void DictAddKey(struct dictTable* table, const char* key, const int value)
 
         if (!table->nodes[index])
         {
-            return;
+            free(table->nodes[index]);
+            return -1;
         }
 
         table->nodes[index]->key = key;
@@ -90,14 +85,15 @@ void DictAddKey(struct dictTable* table, const char* key, const int value)
         table->nodes[index]->prev = NULL;
         table->nodes[index]->value = value;
 
-        return; 
+        return 0; 
     }
 
     struct dictNode* newItem = malloc(sizeof(struct dictNode));
 
     if (!newItem)
     {
-        return;
+        free(newItem);
+        return -1;
     }
 
     newItem->key = key;
@@ -111,9 +107,9 @@ void DictAddKey(struct dictTable* table, const char* key, const int value)
     {
         if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
-            printf("\nFound a matching key, cannot add the new element\n");
+            //printf("\nFound a matching key, cannot add the new element\n");
             free(newItem);
-            return;
+            return -1;
         }
 
         tail = head;
@@ -122,7 +118,7 @@ void DictAddKey(struct dictTable* table, const char* key, const int value)
 
     tail->next = newItem;
     newItem->prev = tail;
-    return;
+    return 0;
 }
 
 
@@ -136,7 +132,7 @@ dictNode* DictContainsKey(struct dictTable* table, const char* key)
 
     if (!table->nodes[index])
     {
-        printf("There aren't any elements at this dictionary index\n");
+        //printf("There aren't any elements at this dictionary index\n");
         return NULL;
     }
 
@@ -146,8 +142,6 @@ dictNode* DictContainsKey(struct dictTable* table, const char* key)
     {
         if (current_node->keyLen == key_len && !memcmp(current_node->key, key, key_len))
         {
-            printf("FOUND!!! Key %s with a value %d at index [%llu], list slot {%llu}\n", key, current_node->value, index, i);
-            
             return current_node;
         }
         else if (current_node->next)
@@ -155,19 +149,20 @@ dictNode* DictContainsKey(struct dictTable* table, const char* key)
             current_node = current_node->next;
         }
     }
+
     printf("Key not found\n");
     return NULL;
 }
 
 
 
-void DictRemoveKey(struct dictTable* table, const char* key)
+int DictRemoveKey(struct dictTable* table, const char* key)
 {
     dictNode* nodeToRemove = DictContainsKey(table, key);
 
     if (nodeToRemove)
     {
-        printf("key of node to remove: %s\n", nodeToRemove->key);
+        //printf("key of node to remove: %s\n", nodeToRemove->key);
         const size_t key_len = strlen(key);
         const size_t hash = HashDJB33X(key, key_len);
         const size_t index = hash % table->hashmapSize;
@@ -185,7 +180,7 @@ void DictRemoveKey(struct dictTable* table, const char* key)
             }
             
             free(current_node);
-            return;
+            return 0;
         }
         else
         {  
@@ -197,8 +192,11 @@ void DictRemoveKey(struct dictTable* table, const char* key)
             }
             
             free(nodeToRemove);
+            return 0;
         }
     }
+
+    return -1;
 }
 
 

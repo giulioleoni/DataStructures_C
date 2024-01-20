@@ -7,7 +7,7 @@
 #define AIVUNIT_INT_EQ(expected, actual)\
 if (expected != actual) \
 { \
-    printf("%s: expected %d but was %d\n", __FUNCTION__, expected, actual);        /* __FUNCTION__ ci prende il nome della funzione */ \
+    printf("%s: expected %d but was %d\n", __FUNCTION__, expected, actual);        /* __FUNCTION__ prende il nome della funzione */ \
     exit(-1); \
 } \
 
@@ -23,7 +23,7 @@ if (!(actual)) \
 #define AIVUNIT_RUNNER(...) \
 int main() \
 { \
-    void (* tests[])() = { __VA_ARGS__ };     /* __VA_ARGS__ prende l'argomento che gli passiamo nei 3 puntini, che saranno i nomi delle funzioni*/ \
+    void (* tests[])() = { __VA_ARGS__ };     /* __VA_ARGS__ prende l'argomento che gli passiamo, che saranno i nomi delle funzioni*/ \
     int count = sizeof(tests) / sizeof(void*); \
     for (int i = 0; i < count; i++) \
     { \
