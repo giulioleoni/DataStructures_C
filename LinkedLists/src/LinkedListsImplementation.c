@@ -5,7 +5,6 @@ void FreeListMemory(listItem** head)
 {
     if (!(*head))
     {
-        printf("The head is NULL\n");
         return;
     }
     
@@ -18,8 +17,6 @@ void FreeListMemory(listItem** head)
     }
 
     *head = NULL;
-
-    //printf("Freed memory\n");
 }
 
 void PrintList(listItem* head)
@@ -40,7 +37,7 @@ void PrintList(listItem* head)
     }
 }
 
-listItem* GetTail(listItem* head)
+listItem* ListGetTail(listItem* head)
 {
     if (!head)
     {
@@ -68,7 +65,7 @@ listItem* ListAppend(listItem** head, int value)
         return NULL;
     }
     
-    listItem* tail = GetTail(*head);
+    listItem* tail = ListGetTail(*head);
     
     if (!tail)
     {
@@ -84,15 +81,14 @@ listItem* ListAppend(listItem** head, int value)
     return item;
 }
 
-int RemoveValueFromList(listItem** head, int value)
+int ListRemoveValue(listItem** head, int value)
 {
     if (!*head)
     {
-        printf("The head is NULL\n");
         return -1;
     }   
     
-    int removedValue;      // variable for debug purposes
+    int removedValue;      
     listItem* itemToRemove = NULL;
 
     if ((*head)->value == value)
@@ -114,7 +110,6 @@ int RemoveValueFromList(listItem** head, int value)
             
             if (currentItem->next == NULL)
             {
-                printf("\nThis value is not in the list\n");
                 return -1;
             }
         }    
@@ -135,7 +130,7 @@ int RemoveValueFromList(listItem** head, int value)
 
 
 
-void ReverseList(listItem** head)
+void ListReverse(listItem** head)
 {
     listItem* currentItem = *head;
     listItem* previousItem = NULL;

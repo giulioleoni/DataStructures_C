@@ -1,1 +1,2 @@
-clang -o tests.exe .\TestsMain.c .\LinkedListsImplementation.c
+md bin
+clang -o bin\LinkedListTest.exe src\*.c test\*.c -Iinclude 

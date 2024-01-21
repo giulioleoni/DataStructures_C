@@ -1,3 +1,5 @@
+#ifndef DOUBLYLINKEDLISTS_H
+#define DOUBLYLINKEDLISTS_H
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -18,8 +20,4 @@ void DoublyListAddValueBeforeItem(doublyListItem** item, int value);
 int DoublyListRemoveValue(doublyListItem** head, int value);
 
 
-
-
-
-
-
+#endif

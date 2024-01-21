@@ -9,12 +9,12 @@ typedef struct listItem
 
 
 
-int RemoveValueFromList(listItem** head, int value);
+int ListRemoveValue(listItem** head, int value);
 listItem* ListAppend(listItem** head, int value);
-listItem* GetTail(listItem* head);
+listItem* ListGetTail(listItem* head);
 void PrintList(listItem* head);
 void FreeListMemory(listItem** head);
-void ReverseList(listItem** head);
+void ListReverse(listItem** head);
 
 
 
