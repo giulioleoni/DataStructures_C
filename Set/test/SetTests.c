@@ -2,12 +2,168 @@
 #include "clove-unit.h"
 #include "Set.h"
 
+CLOVE_TEST(CreateNewSetTable)
+{
+    setTable *table = NewSetTable(4);
 
+    CLOVE_NOT_NULL(table);
+}
+
+CLOVE_TEST(CreateNewSetTableWhitNegativeSize)
+{
+    setTable *table = NewSetTable(-4);
+
+    CLOVE_NULL(table);
+}
+
+CLOVE_TEST(AddOneKeyToNewSet)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string0 = "Word";
+
+    SetInsert(table, string0);
+
+    CLOVE_STRING_EQ(string0, table->nodes[3]->key);
+}
+
+CLOVE_TEST(AddMoreKeyToNewSet)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    CLOVE_STRING_EQ(string2, table->nodes[1]->next->key);
+    CLOVE_STRING_EQ(string3, table->nodes[1]->next->next->key);
+}
+
+CLOVE_TEST(AddAnExistingKey)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+    const char *string4 = "AAAAAA";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+    int insertResult = SetInsert(table, string4);
+
+    CLOVE_INT_EQ(-2, insertResult);
+}
+
+CLOVE_TEST(SetSearchAnExistingKey)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    setNode *nodeToCheck = SetSearch(table, string2);
+    CLOVE_NOT_NULL(nodeToCheck);
+}
+
+CLOVE_TEST(SetSearchANotExistingKey)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    setNode *nodeToCheck = SetSearch(table, "dnjsnc");
+    CLOVE_NULL(nodeToCheck);
+}
+
+CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
+{
+    setTable *table = NewSetTable(4);
+
+    const char *string0 = "Word";
+
+    SetInsert(table, string0);
+
+    int removeResult = SetRemove(table, string0);
+
+    CLOVE_INT_EQ(0, removeResult);
+    CLOVE_NULL(table->nodes[3]);
+}
+
+CLOVE_TEST(RemovingElementInsideSet)
+{
+    // removing a node, which is inside a list of the set
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    int removeResult = SetRemove(table, string2);
+    CLOVE_INT_EQ(0, removeResult);
+    CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
+}
+
+CLOVE_TEST(RemovingHeadOfSet)
+{
+    // removing a node, which is head of a list with other elements
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    int removeResult = SetRemove(table, string1);
+    CLOVE_INT_EQ(0, removeResult);
+    CLOVE_STRING_EQ(string2, table->nodes[1]->key);
+}
+
+CLOVE_TEST(RemovingLastSetElement)
+{
+    // removing a node, which is the last element of a list 
+    setTable *table = NewSetTable(4);
+
+    const char *string1 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+
+    SetInsert(table, string1);
+    SetInsert(table, string2);
+    SetInsert(table, string3);
+
+    int removeResult = SetRemove(table, string3);
+    CLOVE_INT_EQ(0, removeResult);
+    CLOVE_NULL(table->nodes[1]->next->next);
+}
 
 // int main(int argc, char** argv)
 // {
 //     setTable* table = NewSetTable(4);
-    
+
 //     const char* string0 = "Word";
 //     const char* string1 = "abc";
 //     const char* string2 = "AAAAAA";
@@ -22,13 +178,13 @@
 //     SetInsert(table, string2);
 //     SetInsert(table, string3);
 //     SetInsert(table, string5);
-    
+
 //     PrintSet(table);
 
 //     printf("searching a set element\n");
 //     SetSearch(table, string1);
 //     printf("\n");
-    
+
 //     printf("searching a key which is not in the set\n");
 //     SetSearch(table, "dcsjn");
 //     printf("\n");
@@ -50,8 +206,3 @@
 
 //     return 0;
 // }
-
-
-
-
-

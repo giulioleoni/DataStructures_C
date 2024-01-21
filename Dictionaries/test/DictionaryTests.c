@@ -4,14 +4,21 @@
 
 CLOVE_TEST(CreateNewDictTable)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
     CLOVE_NOT_NULL(table);
 }
 
+CLOVE_TEST(CreateNewDictTableWhitNegativeSize)
+{
+    dictTable* table = NewDictTable(-4);
+
+    CLOVE_NULL(table);
+}
+
 CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
     const char *string0 = "Word";
     int value0 = 1;
@@ -25,11 +32,11 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
 CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
 {
     // Adding more key at the same index, one after the other
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -48,12 +55,12 @@ CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
 
 CLOVE_TEST(AddAnExistingKey)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
-    const char *string4 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
+    const char* string4 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -70,11 +77,11 @@ CLOVE_TEST(AddAnExistingKey)
 
 CLOVE_TEST(DictionaryContainsKey)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -84,18 +91,18 @@ CLOVE_TEST(DictionaryContainsKey)
     DictAddKey(table, string2, &value2);
     DictAddKey(table, string3, &value3);
 
-    dictNode *nodeToCheck = DictContainsKey(table, string2);
+    dictNode* nodeToCheck = DictContainsKey(table, string2);
 
     CLOVE_NOT_NULL(nodeToCheck);
 }
 
 CLOVE_TEST(DictionaryNotContainsKey)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -105,16 +112,16 @@ CLOVE_TEST(DictionaryNotContainsKey)
     DictAddKey(table, string2, &value2);
     DictAddKey(table, string3, &value3);
 
-    dictNode *nodeToCheck = DictContainsKey(table, "pasta");
+    dictNode* nodeToCheck = DictContainsKey(table, "pasta");
 
     CLOVE_NULL(nodeToCheck);
 }
 
 CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
 {
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string0 = "Word";
+    const char* string0 = "Word";
     int value0 = 1;
 
     DictAddKey(table, string0, &value0);
@@ -122,16 +129,17 @@ CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
     int removeResult = DictRemoveKey(table, string0);
 
     CLOVE_INT_EQ(0, removeResult);
+    CLOVE_NULL(table->nodes[3]);
 }
 
 CLOVE_TEST(RemovingKeyInsideDictionary)
 {
     // removing a key, which is inside a list of the dictionary
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -145,17 +153,17 @@ CLOVE_TEST(RemovingKeyInsideDictionary)
 
     CLOVE_INT_EQ(0, removeResult);
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
-    CLOVE_INT_EQ(value3, *(int *)table->nodes[1]->next->value);
+    CLOVE_INT_EQ(value3, *(int*)table->nodes[1]->next->value);
 }
 
 CLOVE_TEST(RemovingKeyHeadOfList)
 {
     // removing a key, which is head of a list with other elements
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
@@ -174,11 +182,11 @@ CLOVE_TEST(RemovingKeyHeadOfList)
 CLOVE_TEST(RemovingKeyAtEndOfList)
 {
     // removing a key, which is the last element of a list 
-    dictTable *table = NewDictTable(4);
+    dictTable* table = NewDictTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     int value1 = 1;
     int value2 = 2;

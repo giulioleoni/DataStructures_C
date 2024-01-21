@@ -12,7 +12,6 @@ size_t HashDJB33X(const char* key, const size_t keylen)
     return hash;
 }
 
-
 void PrintSet(struct setTable* table)
 {
     if (!table)
@@ -20,7 +19,6 @@ void PrintSet(struct setTable* table)
         return;
     }
     
-    printf("\nPRINTING SET\n");
     for (int i = 0; i < table->hashmapSize; i++)
     {
         if (table->nodes[i])
@@ -43,16 +41,12 @@ void PrintSet(struct setTable* table)
             }   
         }
     } 
-
-    printf("END PRINTING SET\n\n");
-
 }
 
 setTable* NewSetTable(const size_t hashmapSize)
 {
     if (hashmapSize <= 0)
     {
-        printf("You cannot create a table that has a length negative or equal to 0");
         return NULL;
     }
     
@@ -77,13 +71,11 @@ setTable* NewSetTable(const size_t hashmapSize)
 
 
 
-void SetInsert(struct setTable* table, const char *key)
+int SetInsert(struct setTable* table, const char *key)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
     const size_t index = hash % table->hashmapSize;
-
-    printf("hash of %s = %llu (index = %llu), keylen = %llu\n", key, hash, index, keyLen);
 
     struct setNode* head = table->nodes[index];
 
@@ -93,7 +85,7 @@ void SetInsert(struct setTable* table, const char *key)
 
         if (!table->nodes[index])
         {
-            return;
+            return -1;
         }
 
         table->nodes[index]->key = key;
@@ -101,14 +93,14 @@ void SetInsert(struct setTable* table, const char *key)
         table->nodes[index]->next = NULL;
         table->nodes[index]->prev = NULL;
 
-        return; 
+        return 0; 
     }
 
     struct setNode* newItem = malloc(sizeof(struct setNode));
 
     if (!newItem)
     {
-        return;
+        return -1;
     }
 
     newItem->key = key;
@@ -121,9 +113,8 @@ void SetInsert(struct setTable* table, const char *key)
     {
         if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
-            printf("\nFound a matching key, cannot add the new element\n");
             free(newItem);
-            return;
+            return -2;
         }
 
         tail = head;
@@ -132,7 +123,7 @@ void SetInsert(struct setTable* table, const char *key)
 
     tail->next = newItem;
     newItem->prev = tail;
-    return;
+    return 0;
 }
 
 
@@ -144,7 +135,7 @@ setNode* SetSearch(struct setTable* table, const char* key)
 
     if (!table->nodes[index])
     {
-        printf("There aren't any elements at this set index\n");
+        //printf("There aren't any elements at this set index\n");
         return NULL;
     }
 
@@ -154,7 +145,7 @@ setNode* SetSearch(struct setTable* table, const char* key)
     {
         if (currentNode->keyLen == keyLen && !memcmp(currentNode->key, key, keyLen))
         {
-            printf("FOUND %s at index [%llu], linked list slot {%llu}\n", key, index, i);
+            //printf("FOUND %s at index [%llu], linked list slot {%llu}\n", key, index, i);
             
             return currentNode;
         }
@@ -164,19 +155,18 @@ setNode* SetSearch(struct setTable* table, const char* key)
         }
         
     }
-    printf("Key not found");
+    //printf("Key not found");
     return NULL;
 }
 
 
 
-void SetRemove(struct setTable* table, const char* key)
+int SetRemove(struct setTable* table, const char* key)
 {
     setNode* nodeToRemove = SetSearch(table, key);
 
     if (nodeToRemove)
     {
-        printf("key of node to remove: %s", nodeToRemove->key);
         const size_t keyLen = strlen(key);
         const size_t hash = HashDJB33X(key, keyLen);
         const size_t index = hash % table->hashmapSize;
@@ -194,7 +184,7 @@ void SetRemove(struct setTable* table, const char* key)
             }
             
             free(currentNode);
-            return;
+            return 0;
         }
         else
         {  
@@ -206,8 +196,11 @@ void SetRemove(struct setTable* table, const char* key)
             }
             
             free(nodeToRemove);
+            return 0;
         }
     }
+
+    return -1;
 }
 
 

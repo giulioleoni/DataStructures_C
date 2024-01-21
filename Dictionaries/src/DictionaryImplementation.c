@@ -40,6 +40,11 @@ void PrintDict(struct dictTable* table)
 
 dictTable* NewDictTable(const size_t hashmapSize)
 {
+    if (hashmapSize <= 0)
+    {
+        return NULL;
+    }
+
     struct dictTable* table = malloc(sizeof(struct dictTable));
 
     if(!table)
@@ -52,7 +57,6 @@ dictTable* NewDictTable(const size_t hashmapSize)
 
     if (!table->nodes)
     {
-        free(table);
         return NULL;
     }
     
@@ -75,7 +79,6 @@ int DictAddKey(struct dictTable* table, const char* key, void* value)
 
         if (!table->nodes[index])
         {
-            free(table->nodes[index]);
             return -1;
         }
 
@@ -92,7 +95,6 @@ int DictAddKey(struct dictTable* table, const char* key, void* value)
 
     if (!newItem)
     {
-        free(newItem);
         return -1;
     }
 
