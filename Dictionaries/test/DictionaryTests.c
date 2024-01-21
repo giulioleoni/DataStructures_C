@@ -20,7 +20,7 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
     DictAddKey(table, string0, &value0);
 
     CLOVE_STRING_EQ(string0, table->nodes[3]->key);
-    CLOVE_INT_EQ(value0, *(int *)table->nodes[3]->value);
+    CLOVE_INT_EQ(value0, *(int*)table->nodes[3]->value);
 }
 
 CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
@@ -41,10 +41,10 @@ CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
     DictAddKey(table, string3, &value3);
 
     CLOVE_STRING_EQ(string2, table->nodes[1]->next->key);
-    CLOVE_INT_EQ(value2, *(int *)table->nodes[1]->next->value);
+    CLOVE_INT_EQ(value2, *(int*)table->nodes[1]->next->value);
 
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->next->key);
-    CLOVE_INT_EQ(value3, *(int *)table->nodes[1]->next->next->value);
+    CLOVE_INT_EQ(value3, *(int*)table->nodes[1]->next->next->value);
 }
 
 CLOVE_TEST(AddAnExistingKey)
