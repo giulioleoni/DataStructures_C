@@ -52,15 +52,21 @@ CLOVE_TEST(AddAnExistingKey)
     dictTable *table = NewDictTable(4);
 
     const char *string1 = "abc";
-    const char *string2 = "abc";
+    const char *string2 = "AAAAAA";
+    const char *string3 = "pizza";
+    const char *string4 = "pizza";
 
     int value1 = 1;
     int value2 = 2;
+    int value3 = 3;
+    int value4 = 4;
 
     DictAddKey(table, string1, &value1);
-    int addResult = DictAddKey(table, string2, &value2);
+    DictAddKey(table, string2, &value2);
+    DictAddKey(table, string3, &value3);
+    int addResult = DictAddKey(table, string4, &value4);
 
-    CLOVE_INT_NE(0, addResult);
+    CLOVE_INT_EQ(-2, addResult);
 }
 
 CLOVE_TEST(DictionaryContainsKey)

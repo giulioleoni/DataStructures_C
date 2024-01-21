@@ -107,9 +107,8 @@ int DictAddKey(struct dictTable* table, const char* key, void* value)
     {
         if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
-            //printf("\nFound a matching key, cannot add the new element\n");
             free(newItem);
-            return -1;
+            return -2;
         }
 
         tail = head;
@@ -132,7 +131,6 @@ dictNode* DictContainsKey(struct dictTable* table, const char* key)
 
     if (!table->nodes[index])
     {
-        //printf("There aren't any elements at this dictionary index\n");
         return NULL;
     }
 
@@ -162,7 +160,6 @@ int DictRemoveKey(struct dictTable* table, const char* key)
 
     if (nodeToRemove)
     {
-        //printf("key of node to remove: %s\n", nodeToRemove->key);
         const size_t key_len = strlen(key);
         const size_t hash = HashDJB33X(key, key_len);
         const size_t index = hash % table->hashmapSize;
