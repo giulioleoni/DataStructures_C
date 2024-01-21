@@ -1,3 +1,5 @@
+#ifndef SET_H
+#define SET_H
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -28,3 +30,4 @@ setNode* SetSearch(struct setTable* table, const char* key);
 void SetRemove(struct setTable* table, const char* key);
 
 
+#endif

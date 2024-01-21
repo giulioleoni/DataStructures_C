@@ -16,7 +16,6 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
     const char *string0 = "Word";
     int value0 = 1;
 
-    // the index of this key will be 3
     DictAddKey(table, string0, &value0);
 
     CLOVE_STRING_EQ(string0, table->nodes[3]->key);
