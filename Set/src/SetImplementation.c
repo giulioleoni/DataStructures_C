@@ -62,7 +62,6 @@ setTable* NewSetTable(const size_t hashmapSize)
 
     if (!table->nodes)
     {
-        free(table);
         return NULL;
     }
     
@@ -135,7 +134,6 @@ setNode* SetSearch(struct setTable* table, const char* key)
 
     if (!table->nodes[index])
     {
-        //printf("There aren't any elements at this set index\n");
         return NULL;
     }
 
@@ -145,17 +143,14 @@ setNode* SetSearch(struct setTable* table, const char* key)
     {
         if (currentNode->keyLen == keyLen && !memcmp(currentNode->key, key, keyLen))
         {
-            //printf("FOUND %s at index [%llu], linked list slot {%llu}\n", key, index, i);
-            
             return currentNode;
         }
         else if (currentNode->next)
         {
             currentNode = currentNode->next;
         }
-        
     }
-    //printf("Key not found");
+
     return NULL;
 }
 
@@ -191,7 +186,7 @@ int SetRemove(struct setTable* table, const char* key)
             nodeToRemove->prev->next = nodeToRemove->next;
             if (nodeToRemove->next)
             {
-                // if is not the last element of the list
+                // if it is not the last element of the list
                 nodeToRemove->next->prev = nodeToRemove->prev;
             }
             

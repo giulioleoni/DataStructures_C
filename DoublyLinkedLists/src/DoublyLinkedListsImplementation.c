@@ -1,7 +1,7 @@
 #include "DoublyLinkedLists.h"
 
 
-doublyListItem* GetTail(doublyListItem* head)
+doublyListItem* DoublyListGetTail(doublyListItem* head)
 {
     if (!head)
     {
@@ -19,8 +19,6 @@ doublyListItem* GetTail(doublyListItem* head)
 
     return tail;
 }
-
-
 
 void PrintDoublyList(doublyListItem* head)
 {
@@ -40,44 +38,31 @@ void PrintDoublyList(doublyListItem* head)
     }
 }
 
-void PrintDoublyListReverse(doublyListItem* head)
-{
-    if (!head)
-    {
-        printf("The head is NULL\n");
-        return;
-    }
-    
-    doublyListItem* tail = GetTail(head);
-
-    int index = 0;
-    while (tail)
-    {
-        printf("Value at index %d: %d\n", index, tail->value);
-        tail = tail->prev;
-        index--;
-    }
-}
-
 void FreeDoublyListMemory(doublyListItem** head)
 {
     if (!(*head))
     {
-        printf("The head is NULL");
         return;
     }
 
     doublyListItem* currentItem = *head;
 
-    while (currentItem->next)
+    while (currentItem->next != NULL)
     {
+        printf("curr val: %d\n", currentItem->value);
+
         currentItem = currentItem->next;
+
+        printf("next curr val: %d\n", currentItem->value);
+        printf("prev val: %d\n", currentItem->prev->value);
+
         free(currentItem->prev);
+
+        printf("fa il free\n");
     }
 
+    printf("esce dal ciclo\n");
     free(currentItem);
-
-    printf("Freed memory\n");
 }
 
 doublyListItem* DoublyListAppend(doublyListItem** head, int value)
@@ -89,7 +74,7 @@ doublyListItem* DoublyListAppend(doublyListItem** head, int value)
         return NULL;
     }
     
-    doublyListItem* tail = GetTail(*head);
+    doublyListItem* tail = DoublyListGetTail(*head);
     
     if (!tail)
     {
@@ -106,7 +91,7 @@ doublyListItem* DoublyListAppend(doublyListItem** head, int value)
     return item;
 }
 
-void AddValueAfterItem(doublyListItem* item, int value)
+void DoublyListAddValueAfterItem(doublyListItem* item, int value)
 {
     doublyListItem* newItem = malloc(sizeof(doublyListItem));
 
@@ -132,7 +117,7 @@ void AddValueAfterItem(doublyListItem* item, int value)
     }  
 }
 
-void AddValueBeforeItem(doublyListItem** item, int value)
+void DoublyListAddValueBeforeItem(doublyListItem** item, int value)
 {
     doublyListItem* newItem = malloc(sizeof(doublyListItem));
 
@@ -161,13 +146,13 @@ void AddValueBeforeItem(doublyListItem** item, int value)
 
 
 
-int RemoveValueFromDoublyList(doublyListItem** head, int value)
+int DoublyListRemoveValue(doublyListItem** head, int value)
 {
     if (!*head)
     {
-        printf("Head is NULL\n");
         return -1;
     }   
+    
     int removedValue;    
 
     if ((*head)->value == value)
@@ -198,7 +183,6 @@ int RemoveValueFromDoublyList(doublyListItem** head, int value)
             currentItem = currentItem->next;
             if (currentItem == NULL)
             {
-                printf("\nThis value is not in the list\n");
                 return -1;
             }
         }    
