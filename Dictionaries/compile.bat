@@ -1,2 +1,2 @@
 md bin
-clang -o bin\dict_test.exe src\*.c test\*.c -Iinclude 
+clang -o bin\dict_test.exe src\*.c test\*.c -Iinclude -I..\Include\

@@ -49,19 +49,11 @@ void FreeDoublyListMemory(doublyListItem** head)
 
     while (currentItem->next != NULL)
     {
-        printf("curr val: %d\n", currentItem->value);
-
         currentItem = currentItem->next;
-
-        printf("next curr val: %d\n", currentItem->value);
-        printf("prev val: %d\n", currentItem->prev->value);
-
         free(currentItem->prev);
 
-        printf("fa il free\n");
     }
 
-    printf("esce dal ciclo\n");
     free(currentItem);
 }
 
@@ -144,7 +136,46 @@ void DoublyListAddValueBeforeItem(doublyListItem** item, int value)
     }  
 }
 
+doublyListItem* DoublyListFindItem(doublyListItem* head, int value)
+{
+    while (head)
+    {
+        if (head->value == value)
+        {
+            return head;
+        }
+        
+        head = head->next;
+    }
+    return NULL;
+}
 
+void DoublyListRemoveItem(doublyListItem** head, doublyListItem* item)
+{
+    if (!(*head) || !item)
+    {
+        return;
+    }
+
+    if (item == *head)
+    {
+        *head = (*head)->next;
+        if (*head)
+        {
+            (*head)->prev = NULL;
+        }
+    }
+    else
+    {
+        item->prev->next = item->next;
+        if (item->next)
+        {
+            item->next->prev = item->prev;
+        }
+    }
+    
+    free(item);
+}
 
 int DoublyListRemoveValue(doublyListItem** head, int value)
 {
@@ -153,54 +184,11 @@ int DoublyListRemoveValue(doublyListItem** head, int value)
         return -1;
     }   
     
-    int removedValue;    
+    doublyListItem* toRemove = DoublyListFindItem(*head, value);
 
-    if ((*head)->value == value)
-    {
-        removedValue = (*head)->value;
-        
-        if ((*head)->next)
-        {
-            *head = (*head)->next;
-            (*head)->prev = NULL;
-        }
-        else
-        {
-            *head = NULL;
-        }
-        
-        free(*head);
-        return removedValue;
-    }
+    DoublyListRemoveItem(head, toRemove);
 
-    doublyListItem* currentItem = *head;
-
-    if (currentItem->next)
-    {
-        
-        while (currentItem->value != value)
-        {
-            currentItem = currentItem->next;
-            if (currentItem == NULL)
-            {
-                return -1;
-            }
-        }    
-
-        removedValue = currentItem->value;
-
-        currentItem->prev->next = currentItem->next;
-        if (currentItem->next)
-        {
-            currentItem->next->prev = currentItem->prev;
-        }
-        
-        free(currentItem);
-
-        return removedValue;
-    }
-
-    return -1;
+    return toRemove != NULL ? 0 : 1;
 }
 
 
