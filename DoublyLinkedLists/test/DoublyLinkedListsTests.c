@@ -33,7 +33,7 @@ CLOVE_TEST(CreateListHeadWithAppend)
     CLOVE_INT_EQ(10, head->value);
     CLOVE_NULL(head->prev);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(AddingMoreElementsToDoublyList)
@@ -50,7 +50,7 @@ CLOVE_TEST(AddingMoreElementsToDoublyList)
     CLOVE_PTR_EQ(head, head->next->prev);
     CLOVE_PTR_EQ(head->next, head->next->next->prev);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(DoublyListFind)
@@ -62,6 +62,8 @@ CLOVE_TEST(DoublyListFind)
 
     doublyListItem* itemFound = DoublyListFindItem(head, 20);
     CLOVE_PTR_EQ(itemToFind, itemFound);
+
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(RemoveElementNotInTheDoublyList)
@@ -75,7 +77,7 @@ CLOVE_TEST(RemoveElementNotInTheDoublyList)
 
     CLOVE_INT_EQ(1, removeResult);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(RemoveHeadOfTheDoublyList)
@@ -107,7 +109,7 @@ CLOVE_TEST(RemoveElementInsideTheDoublyList)
     CLOVE_PTR_EQ(head->next->prev, head);
     CLOVE_INT_EQ(30, head->next->value);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(RemoveLastElementOfTheDoublyList)
@@ -122,7 +124,7 @@ CLOVE_TEST(RemoveLastElementOfTheDoublyList)
     CLOVE_INT_EQ(0, removeResult);
     CLOVE_NULL(head->next->next);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(AddValueBeforeAnItem)
@@ -139,7 +141,7 @@ CLOVE_TEST(AddValueBeforeAnItem)
     CLOVE_PTR_EQ(head->next->next->prev, head->next);
     CLOVE_INT_EQ(30, head->next->next->next->value);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(AddValueBeforeHead)
@@ -156,7 +158,7 @@ CLOVE_TEST(AddValueBeforeHead)
     CLOVE_NULL(head->prev);
     CLOVE_INT_EQ(10, head->next->value);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(AddValueAfterAnItem)
@@ -172,7 +174,7 @@ CLOVE_TEST(AddValueAfterAnItem)
     CLOVE_PTR_EQ(head->next->prev, head);
     CLOVE_INT_EQ(20, head->next->next->value);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 CLOVE_TEST(AddValueAfterLastItem)
@@ -190,7 +192,7 @@ CLOVE_TEST(AddValueAfterLastItem)
     CLOVE_PTR_EQ(itemAdded->prev, item);
     CLOVE_INT_EQ(30, itemAdded->prev->value);
 
-    //FreeDoublyListMemory(&head);
+    FreeDoublyListMemory(&head);
 }
 
 
