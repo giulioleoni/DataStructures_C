@@ -1,6 +1,6 @@
 #include "Set.h"
 
-size_t HashDJB33X(const char* key, const size_t keylen)
+size_t HashDJB33X(const char *key, const size_t keylen)
 {
     size_t hash = 5381;
 
@@ -8,17 +8,17 @@ size_t HashDJB33X(const char* key, const size_t keylen)
     {
         hash = ((hash << 5) + hash) ^ key[i];
     }
-    
+
     return hash;
 }
 
-void PrintSet(struct setTable* table)
+void PrintSet(struct setTable *table)
 {
     if (!table)
     {
         return;
     }
-    
+
     for (int i = 0; i < table->hashmapSize; i++)
     {
         if (table->nodes[i])
@@ -27,32 +27,32 @@ void PrintSet(struct setTable* table)
 
             if (table->nodes[i]->next)
             {
-                setNode* node = table->nodes[i]->next;
+                setNode *node = table->nodes[i]->next;
 
                 int a = 1;
 
                 while (node)
                 {
                     printf("%s key of keylen %llu it the [%d] list at list index {%d}\n", node->key, node->keyLen, i, a);
-                    
+
                     node = node->next;
                     a++;
                 }
-            }   
+            }
         }
-    } 
+    }
 }
 
-setTable* NewSetTable(const size_t hashmapSize)
+setTable *NewSetTable(const size_t hashmapSize)
 {
     if (hashmapSize <= 0)
     {
         return NULL;
     }
-    
-    struct setTable* table = malloc(sizeof(struct setTable));
 
-    if(!table)
+    struct setTable *table = malloc(sizeof(struct setTable));
+
+    if (!table)
     {
         return NULL;
     }
@@ -64,19 +64,17 @@ setTable* NewSetTable(const size_t hashmapSize)
     {
         return NULL;
     }
-    
+
     return table;
 }
 
-
-
-int SetInsert(struct setTable* table, const char *key)
+int SetInsert(struct setTable *table, const char *key)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
     const size_t index = hash % table->hashmapSize;
 
-    struct setNode* head = table->nodes[index];
+    struct setNode *head = table->nodes[index];
 
     if (!head)
     {
@@ -92,10 +90,10 @@ int SetInsert(struct setTable* table, const char *key)
         table->nodes[index]->next = NULL;
         table->nodes[index]->prev = NULL;
 
-        return 0; 
+        return 0;
     }
 
-    struct setNode* newItem = malloc(sizeof(struct setNode));
+    struct setNode *newItem = malloc(sizeof(struct setNode));
 
     if (!newItem)
     {
@@ -106,7 +104,7 @@ int SetInsert(struct setTable* table, const char *key)
     newItem->keyLen = keyLen;
     newItem->next = NULL;
 
-    struct setNode* tail;
+    struct setNode *tail;
 
     while (head)
     {
@@ -125,8 +123,7 @@ int SetInsert(struct setTable* table, const char *key)
     return 0;
 }
 
-
-setNode* SetSearch(struct setTable* table, const char* key)
+setNode *SetSearch(struct setTable *table, const char *key)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
@@ -137,8 +134,8 @@ setNode* SetSearch(struct setTable* table, const char* key)
         return NULL;
     }
 
-    setNode* currentNode = table->nodes[index];
-    
+    setNode *currentNode = table->nodes[index];
+
     for (size_t i = 0; i < table->hashmapSize; i++)
     {
         if (currentNode->keyLen == keyLen && !memcmp(currentNode->key, key, keyLen))
@@ -154,42 +151,38 @@ setNode* SetSearch(struct setTable* table, const char* key)
     return NULL;
 }
 
-
-
-int SetRemove(struct setTable* table, const char* key)
+int SetRemove(struct setTable *table, const char *key)
 {
-    setNode* nodeToRemove = SetSearch(table, key);
+    setNode *nodeToRemove = SetSearch(table, key);
 
     if (nodeToRemove)
     {
-        const size_t keyLen = strlen(key);
-        const size_t hash = HashDJB33X(key, keyLen);
-        const size_t index = hash % table->hashmapSize;
-
-        setNode* currentNode = table->nodes[index];
-
         if (!nodeToRemove->prev)
         {
-            // case nodeToRemove is a head
+            // case nodeToRemove is a head, table->nodes[index]
+            const size_t keyLen = strlen(key);
+            const size_t hash = HashDJB33X(key, keyLen);
+            const size_t index = hash % table->hashmapSize;
+
             table->nodes[index] = table->nodes[index]->next;
             if (table->nodes[index])
             {
                 // case the head have elements in his list
                 table->nodes[index]->prev = NULL;
             }
-            
-            free(currentNode);
+
+            free(nodeToRemove);
             return 0;
         }
         else
-        {  
+        {
             nodeToRemove->prev->next = nodeToRemove->next;
             if (nodeToRemove->next)
             {
                 // if it is not the last element of the list
                 nodeToRemove->next->prev = nodeToRemove->prev;
             }
-            
+
             free(nodeToRemove);
             return 0;
         }
@@ -197,5 +190,3 @@ int SetRemove(struct setTable* table, const char* key)
 
     return -1;
 }
-
-
