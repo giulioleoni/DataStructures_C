@@ -107,7 +107,6 @@ int ListRemoveValue(listItem** head, int value)
         while (currentItem->next->value != value)
         {
             currentItem = currentItem->next;
-            
             if (currentItem->next == NULL)
             {
                 return -1;
@@ -115,13 +114,9 @@ int ListRemoveValue(listItem** head, int value)
         }    
 
         removedValue = currentItem->next->value;
-
         itemToRemove = currentItem->next;
-
         currentItem->next = currentItem->next->next;
-
         free(itemToRemove);
-
         return removedValue;
     }
     
