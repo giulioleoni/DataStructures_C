@@ -110,6 +110,11 @@ int ListRemoveValue(listItem** head, int value)
 
 void ListReverse(listItem** head)
 {
+    if (!(*head))
+    {
+        return;
+    }
+
     listItem* currentItem = *head;
     listItem* previousItem = NULL;
 
@@ -123,6 +128,10 @@ void ListReverse(listItem** head)
     
     *head = previousItem;
 }
+
+
+
+
 
 
 
