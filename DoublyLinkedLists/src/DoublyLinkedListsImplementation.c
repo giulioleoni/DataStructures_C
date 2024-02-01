@@ -188,7 +188,7 @@ int DoublyListRemoveValue(doublyListItem** head, int value)
 
     DoublyListRemoveItem(head, toRemove);
 
-    return toRemove != NULL ? 0 : 1;
+    return toRemove != NULL ? 0 : -1;
 }
 
 

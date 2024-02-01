@@ -75,7 +75,7 @@ CLOVE_TEST(RemoveElementNotInTheDoublyList)
 
     int removeResult = DoublyListRemoveValue(&head, 1234);
 
-    CLOVE_INT_EQ(1, removeResult);
+    CLOVE_INT_EQ(-1, removeResult);
 
     FreeDoublyListMemory(&head);
 }
@@ -88,7 +88,7 @@ CLOVE_TEST(RemoveHeadOfTheDoublyList)
     DoublyListAppend(&head, 30);
 
     int removeResult = DoublyListRemoveValue(&head, 10);
-
+    
     CLOVE_INT_EQ(0, removeResult);
     CLOVE_INT_EQ(20, head->value);
     CLOVE_NULL(head->prev);
