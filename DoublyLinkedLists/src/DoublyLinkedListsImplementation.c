@@ -20,24 +20,6 @@ doublyListItem* DoublyListGetTail(doublyListItem* head)
     return tail;
 }
 
-void PrintDoublyList(doublyListItem* head)
-{
-    if (!head)
-    {
-        printf("The head is NULL\n");
-        return;
-    }
-
-    doublyListItem* currentItem = head;
-    int index = 0;
-    while (currentItem)
-    {
-        printf("Value at index %d: %d\n", index, currentItem->value);
-        currentItem = currentItem->next;
-        index++;
-    }
-}
-
 void FreeDoublyListMemory(doublyListItem** head)
 {
     if (!(*head))

@@ -12,32 +12,6 @@ size_t HashDJB33X(const char* key, const size_t keylen)
     return hash;
 }
 
-void PrintDict(struct dictTable* table)
-{
-    for (int i = 0; i < table->hashmapSize; i++)
-    {
-        if (table->nodes[i])
-        {
-            printf("%s key at dict index [%d]\n", table->nodes[i]->key, i);
-
-            if (table->nodes[i]->next)
-            {
-                dictNode* node = table->nodes[i]->next;
-
-                int a = 1;
-
-                while (node)
-                {
-                    printf("%s key in the [%d] list at list index {%d}\n", node->key, i, a);
-                    
-                    node = node->next;
-                    a++;
-                }
-            }   
-        }
-    } 
-}
-
 dictTable* NewDictTable(const size_t hashmapSize)
 {
     if (hashmapSize <= 0)

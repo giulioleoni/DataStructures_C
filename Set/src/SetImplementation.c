@@ -12,37 +12,6 @@ size_t HashDJB33X(const char *key, const size_t keylen)
     return hash;
 }
 
-void PrintSet(struct setTable *table)
-{
-    if (!table)
-    {
-        return;
-    }
-
-    for (int i = 0; i < table->hashmapSize; i++)
-    {
-        if (table->nodes[i])
-        {
-            printf("%s key of keylen %zu at set index [%d]\n", table->nodes[i]->key, table->nodes[i]->keyLen, i);
-
-            if (table->nodes[i]->next)
-            {
-                setNode *node = table->nodes[i]->next;
-
-                int a = 1;
-
-                while (node)
-                {
-                    printf("%s key of keylen %llu it the [%d] list at list index {%d}\n", node->key, node->keyLen, i, a);
-
-                    node = node->next;
-                    a++;
-                }
-            }
-        }
-    }
-}
-
 setTable *NewSetTable(const size_t hashmapSize)
 {
     if (hashmapSize <= 0)

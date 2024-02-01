@@ -1,6 +1,7 @@
 #include "LinkedLists.h"
 
 
+
 void FreeListMemory(listItem** head)
 {
     if (!(*head))
@@ -17,24 +18,6 @@ void FreeListMemory(listItem** head)
     }
 
     *head = NULL;
-}
-
-void PrintList(listItem* head)
-{
-    if (!head)
-    {
-        printf("The head is NULL\n");
-        return;
-    }
-    
-    listItem* currentItem = head;
-    int index = 0;
-    while (currentItem)
-    {
-        printf("Value at index %d: %d\n", index, currentItem->value);
-        currentItem = currentItem->next;
-        index++;
-    }
 }
 
 listItem* ListGetTail(listItem* head)
