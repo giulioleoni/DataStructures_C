@@ -63,7 +63,6 @@ int SetInsert(struct setTable *table, const char *key)
     }
 
     struct setNode *newItem = malloc(sizeof(struct setNode));
-
     if (!newItem)
     {
         return -1;
