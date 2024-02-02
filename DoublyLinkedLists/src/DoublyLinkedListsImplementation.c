@@ -134,7 +134,7 @@ doublyListItem* DoublyListFindItem(doublyListItem* head, int value)
 
 void DoublyListRemoveItem(doublyListItem** head, doublyListItem* item)
 {
-    if (!(*head) || !item)
+    if (!item)
     {
         return;
     }

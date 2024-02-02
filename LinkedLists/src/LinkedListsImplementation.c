@@ -70,17 +70,15 @@ int ListRemoveValue(listItem** head, int value)
     {
         return -1;
     }   
-    
-    int removedValue;      
+        
     listItem* itemToRemove = NULL;
 
     if ((*head)->value == value)
     {
-        removedValue = (*head)->value;
         itemToRemove = *head;
         *head = (*head)->next;
         free(itemToRemove);
-        return removedValue;
+        return 0;
     }
 
     if ((*head)->next)
@@ -90,17 +88,16 @@ int ListRemoveValue(listItem** head, int value)
         while (currentItem->next->value != value)
         {
             currentItem = currentItem->next;
-            if (currentItem->next == NULL)
+            if (!currentItem->next)
             {
                 return -1;
             }
         }    
 
-        removedValue = currentItem->next->value;
         itemToRemove = currentItem->next;
         currentItem->next = currentItem->next->next;
         free(itemToRemove);
-        return removedValue;
+        return 0;
     }
     
     return -1;
