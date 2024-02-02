@@ -2,7 +2,7 @@
 #include "clove-unit.h"
 #include "LinkedLists.h"
 
-CLOVE_TEST(GetTailTest)
+CLOVE_TEST(ListGetTailTest)
 {
     listItem head;
     head.value = 1;

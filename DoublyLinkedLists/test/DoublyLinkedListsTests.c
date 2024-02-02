@@ -2,7 +2,7 @@
 #include "clove-unit.h"
 #include "DoublyLinkedLists.h"
 
-CLOVE_TEST(GetTailTest)
+CLOVE_TEST(DoublyListGetTailTest)
 {
     doublyListItem head;
     head.value = 1;
