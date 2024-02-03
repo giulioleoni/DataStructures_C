@@ -100,9 +100,8 @@ CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
 
     SetInsert(table, string0);
 
-    int removeResult = SetRemove(table, string0);
+    SetRemove(table, string0);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_NULL(table->nodes[3]);
 }
 
@@ -119,8 +118,8 @@ CLOVE_TEST(RemovingElementInsideSet)
     SetInsert(table, string2);
     SetInsert(table, string3);
 
-    int removeResult = SetRemove(table, string2);
-    CLOVE_INT_EQ(0, removeResult);
+    SetRemove(table, string2);
+    
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
 }
 
@@ -137,8 +136,8 @@ CLOVE_TEST(RemovingHeadOfSet)
     SetInsert(table, string2);
     SetInsert(table, string3);
 
-    int removeResult = SetRemove(table, string1);
-    CLOVE_INT_EQ(0, removeResult);
+    SetRemove(table, string1);
+    
     CLOVE_STRING_EQ(string2, table->nodes[1]->key);
 }
 
@@ -155,7 +154,7 @@ CLOVE_TEST(RemovingLastSetElement)
     SetInsert(table, string2);
     SetInsert(table, string3);
 
-    int removeResult = SetRemove(table, string3);
-    CLOVE_INT_EQ(0, removeResult);
+    SetRemove(table, string3);
+
     CLOVE_NULL(table->nodes[1]->next->next);
 }

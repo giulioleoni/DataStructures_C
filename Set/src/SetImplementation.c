@@ -119,7 +119,7 @@ setNode *SetSearch(struct setTable *table, const char *key)
     return NULL;
 }
 
-int SetRemove(struct setTable *table, const char *key)
+void SetRemove(struct setTable *table, const char *key)
 {
     setNode *nodeToRemove = SetSearch(table, key);
 
@@ -140,7 +140,7 @@ int SetRemove(struct setTable *table, const char *key)
             }
 
             free(nodeToRemove);
-            return 0;
+            return;
         }
         else
         {
@@ -152,9 +152,8 @@ int SetRemove(struct setTable *table, const char *key)
             }
 
             free(nodeToRemove);
-            return 0;
+            return;
         }
     }
 
-    return -1;
 }

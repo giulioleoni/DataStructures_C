@@ -130,7 +130,7 @@ dictNode* DictContainsKey(struct dictTable* table, const char* key)
 
 
 
-int DictRemoveKey(struct dictTable* table, const char* key)
+void DictRemoveKey(struct dictTable* table, const char* key)
 {
     dictNode* nodeToRemove = DictContainsKey(table, key);
 
@@ -153,7 +153,7 @@ int DictRemoveKey(struct dictTable* table, const char* key)
             }
             
             free(current_node);
-            return 0;
+            return;
         }
         else
         {  
@@ -165,11 +165,9 @@ int DictRemoveKey(struct dictTable* table, const char* key)
             }
             
             free(nodeToRemove);
-            return 0;
+            return;
         }
     }
-
-    return -1;
 }
 
 

@@ -23,11 +23,10 @@ typedef struct setNode
 
 
 size_t HashDJB33X(const char* key, const size_t keylen);
-void PrintSet(struct setTable* table);
 setTable* NewSetTable(const size_t hashmapSize);
 int SetInsert(struct setTable* table, const char *key);
 setNode* SetSearch(struct setTable* table, const char* key);
-int SetRemove(struct setTable* table, const char* key);
+void SetRemove(struct setTable* table, const char* key);
 
 
 #endif

@@ -126,9 +126,8 @@ CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
 
     DictAddKey(table, string0, &value0);
 
-    int removeResult = DictRemoveKey(table, string0);
-
-    CLOVE_INT_EQ(0, removeResult);
+    DictRemoveKey(table, string0);
+    
     CLOVE_NULL(table->nodes[3]);
 }
 
@@ -149,9 +148,8 @@ CLOVE_TEST(RemovingKeyInsideDictionary)
     DictAddKey(table, string2, &value2);
     DictAddKey(table, string3, &value3);
 
-    int removeResult = DictRemoveKey(table, string2);
+    DictRemoveKey(table, string2);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
     CLOVE_INT_EQ(value3, *(int*)table->nodes[1]->next->value);
 }
@@ -173,9 +171,8 @@ CLOVE_TEST(RemovingKeyHeadOfList)
     DictAddKey(table, string2, &value2);
     DictAddKey(table, string3, &value3);
 
-    int removeResult = DictRemoveKey(table, string1);
+    DictRemoveKey(table, string1);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_STRING_EQ(string2, table->nodes[1]->key);
 }
 
@@ -196,9 +193,8 @@ CLOVE_TEST(RemovingKeyAtEndOfList)
     DictAddKey(table, string2, &value2);
     DictAddKey(table, string3, &value3);
 
-    int removeResult = DictRemoveKey(table, string3);
+    DictRemoveKey(table, string3);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_NULL(table->nodes[1]->next->next);
 }
 

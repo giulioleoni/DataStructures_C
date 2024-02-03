@@ -13,7 +13,6 @@ typedef struct doublyListItem
 
 
 doublyListItem* DoublyListGetTail(doublyListItem* head);
-void PrintDoublyList(doublyListItem* head);
 void FreeDoublyListMemory(doublyListItem** head);
 doublyListItem* DoublyListAppend(doublyListItem** head, int value);
 void DoublyListAddValueAfterItem(doublyListItem* item, int value);
