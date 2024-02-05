@@ -18,7 +18,7 @@ CLOVE_TEST(DoublyListGetTailTest)
     third.next = NULL;
     third.prev = &second;
 
-    doublyListItem *tail = DoublyListGetTail(&head);
+    doublyListItem* tail = DoublyListGetTail(&head);
 
     CLOVE_IS_TRUE(tail != NULL);
     CLOVE_INT_EQ(tail->value, third.value);
@@ -26,7 +26,7 @@ CLOVE_TEST(DoublyListGetTailTest)
 
 CLOVE_TEST(CreateListHeadWithAppend)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
 
     CLOVE_NOT_NULL(head);
@@ -38,7 +38,7 @@ CLOVE_TEST(CreateListHeadWithAppend)
 
 CLOVE_TEST(AddingMoreElementsToDoublyList)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -55,7 +55,7 @@ CLOVE_TEST(AddingMoreElementsToDoublyList)
 
 CLOVE_TEST(DoublyListFind)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     doublyListItem* itemToFind = DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -68,7 +68,7 @@ CLOVE_TEST(DoublyListFind)
 
 CLOVE_TEST(RemoveElementNotInTheDoublyList)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -82,7 +82,7 @@ CLOVE_TEST(RemoveElementNotInTheDoublyList)
 
 CLOVE_TEST(RemoveHeadOfTheDoublyList)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -98,7 +98,7 @@ CLOVE_TEST(RemoveHeadOfTheDoublyList)
 
 CLOVE_TEST(RemoveElementInsideTheDoublyList)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -114,7 +114,7 @@ CLOVE_TEST(RemoveElementInsideTheDoublyList)
 
 CLOVE_TEST(RemoveLastElementOfTheDoublyList)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -129,7 +129,7 @@ CLOVE_TEST(RemoveLastElementOfTheDoublyList)
 
 CLOVE_TEST(AddValueBeforeAnItem)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -146,7 +146,7 @@ CLOVE_TEST(AddValueBeforeAnItem)
 
 CLOVE_TEST(AddValueBeforeHead)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -163,7 +163,7 @@ CLOVE_TEST(AddValueBeforeHead)
 
 CLOVE_TEST(AddValueAfterAnItem)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
@@ -179,7 +179,7 @@ CLOVE_TEST(AddValueAfterAnItem)
 
 CLOVE_TEST(AddValueAfterLastItem)
 {
-    doublyListItem *head = NULL;
+    doublyListItem* head = NULL;
     DoublyListAppend(&head, 10);
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
