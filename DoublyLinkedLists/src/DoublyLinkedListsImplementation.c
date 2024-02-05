@@ -1,6 +1,5 @@
 #include "DoublyLinkedLists.h"
 
-
 doublyListItem* DoublyListGetTail(doublyListItem* head)
 {
     if (!head)
