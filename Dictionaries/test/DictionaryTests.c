@@ -20,7 +20,7 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
 {
     dictTable* table = NewDictTable(4);
 
-    const char *string0 = "Word";
+    const char* string0 = "Word";
     int value0 = 1;
 
     DictAddKey(table, string0, &value0);
