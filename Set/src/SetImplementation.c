@@ -12,14 +12,14 @@ size_t HashDJB33X(const char* key, const size_t keylen)
     return hash;
 }
 
-setTable *NewSetTable(const size_t hashmapSize)
+setTable* NewSetTable(const size_t hashmapSize)
 {
     if (hashmapSize <= 0)
     {
         return NULL;
     }
 
-    struct setTable *table = malloc(sizeof(struct setTable));
+    struct setTable* table = malloc(sizeof(struct setTable));
 
     if (!table)
     {
@@ -37,13 +37,13 @@ setTable *NewSetTable(const size_t hashmapSize)
     return table;
 }
 
-int SetInsert(struct setTable *table, const char *key)
+int SetInsert(struct setTable* table, const char* key)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
     const size_t index = hash % table->hashmapSize;
 
-    struct setNode *head = table->nodes[index];
+    struct setNode* head = table->nodes[index];
 
     if (!head)
     {
@@ -62,7 +62,7 @@ int SetInsert(struct setTable *table, const char *key)
         return 0;
     }
 
-    struct setNode *newItem = malloc(sizeof(struct setNode));
+    struct setNode* newItem = malloc(sizeof(struct setNode));
     if (!newItem)
     {
         return -1;
@@ -72,7 +72,7 @@ int SetInsert(struct setTable *table, const char *key)
     newItem->keyLen = keyLen;
     newItem->next = NULL;
 
-    struct setNode *tail;
+    struct setNode* tail;
 
     while (head)
     {
@@ -91,7 +91,7 @@ int SetInsert(struct setTable *table, const char *key)
     return 0;
 }
 
-setNode *SetSearch(struct setTable *table, const char *key)
+setNode* SetSearch(struct setTable* table, const char* key)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
@@ -102,7 +102,7 @@ setNode *SetSearch(struct setTable *table, const char *key)
         return NULL;
     }
 
-    setNode *currentNode = table->nodes[index];
+    setNode* currentNode = table->nodes[index];
 
     for (size_t i = 0; i < table->hashmapSize; i++)
     {
@@ -119,9 +119,9 @@ setNode *SetSearch(struct setTable *table, const char *key)
     return NULL;
 }
 
-void SetRemove(struct setTable *table, const char *key)
+void SetRemove(struct setTable* table, const char* key)
 {
-    setNode *nodeToRemove = SetSearch(table, key);
+    setNode* nodeToRemove = SetSearch(table, key);
 
     if (nodeToRemove)
     {
