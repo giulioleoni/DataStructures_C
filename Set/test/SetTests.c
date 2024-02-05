@@ -4,23 +4,23 @@
 
 CLOVE_TEST(CreateNewSetTable)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
     CLOVE_NOT_NULL(table);
 }
 
 CLOVE_TEST(CreateNewSetTableWhitNegativeSize)
 {
-    setTable *table = NewSetTable(-4);
+    setTable* table = NewSetTable(-4);
 
     CLOVE_NULL(table);
 }
 
 CLOVE_TEST(AddOneKeyToNewSet)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string0 = "Word";
+    const char* string0 = "Word";
 
     SetInsert(table, string0);
 
@@ -29,11 +29,11 @@ CLOVE_TEST(AddOneKeyToNewSet)
 
 CLOVE_TEST(AddMoreKeyToNewSet)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
@@ -45,12 +45,12 @@ CLOVE_TEST(AddMoreKeyToNewSet)
 
 CLOVE_TEST(AddAnExistingKey)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
-    const char *string4 = "AAAAAA";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
+    const char* string4 = "AAAAAA";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
@@ -62,41 +62,41 @@ CLOVE_TEST(AddAnExistingKey)
 
 CLOVE_TEST(SetSearchAnExistingKey)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
     SetInsert(table, string3);
 
-    setNode *nodeToCheck = SetSearch(table, string2);
+    setNode* nodeToCheck = SetSearch(table, string2);
     CLOVE_NOT_NULL(nodeToCheck);
 }
 
 CLOVE_TEST(SetSearchANotExistingKey)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
     SetInsert(table, string3);
 
-    setNode *nodeToCheck = SetSearch(table, "dnjsnc");
+    setNode* nodeToCheck = SetSearch(table, "dnjsnc");
     CLOVE_NULL(nodeToCheck);
 }
 
 CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
 {
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string0 = "Word";
+    const char* string0 = "Word";
 
     SetInsert(table, string0);
 
@@ -108,11 +108,11 @@ CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
 CLOVE_TEST(RemovingElementInsideSet)
 {
     // removing a node, which is inside a list of the set
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
@@ -126,11 +126,11 @@ CLOVE_TEST(RemovingElementInsideSet)
 CLOVE_TEST(RemovingHeadOfSet)
 {
     // removing a node, which is head of a list with other elements
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
@@ -144,11 +144,11 @@ CLOVE_TEST(RemovingHeadOfSet)
 CLOVE_TEST(RemovingLastSetElement)
 {
     // removing a node, which is the last element of a list 
-    setTable *table = NewSetTable(4);
+    setTable* table = NewSetTable(4);
 
-    const char *string1 = "abc";
-    const char *string2 = "AAAAAA";
-    const char *string3 = "pizza";
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
 
     SetInsert(table, string1);
     SetInsert(table, string2);
