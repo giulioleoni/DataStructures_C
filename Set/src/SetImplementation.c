@@ -1,6 +1,6 @@
 #include "Set.h"
 
-size_t HashDJB33X(const char *key, const size_t keylen)
+size_t HashDJB33X(const char* key, const size_t keylen)
 {
     size_t hash = 5381;
 
