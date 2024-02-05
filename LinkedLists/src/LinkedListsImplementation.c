@@ -1,7 +1,5 @@
 #include "LinkedLists.h"
 
-
-
 void FreeListMemory(listItem** head)
 {
     if (!(*head))
