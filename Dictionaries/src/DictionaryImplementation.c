@@ -77,7 +77,7 @@ int DictAddKey(struct dictTable* table, const char* key, void* value)
     newItem->next = NULL;
     newItem->value = value;
 
-    struct dictNode *tail;
+    struct dictNode* tail;
     
     while (head)
     {
