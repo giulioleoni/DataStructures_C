@@ -1,3 +1,5 @@
+#ifndef LIST_H
+#define LIST_H
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -17,7 +19,7 @@ void FreeListMemory(listItem** head);
 void ListReverse(listItem** head);
 
 
-
+#endif
 
 
 
