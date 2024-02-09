@@ -104,16 +104,14 @@ setNode* SetSearch(struct setTable* table, const char* key)
 
     setNode* currentNode = table->nodes[index];
 
-    for (size_t i = 0; i < table->hashmapSize; i++)
+    while (currentNode)
     {
         if (currentNode->keyLen == keyLen && !memcmp(currentNode->key, key, keyLen))
         {
             return currentNode;
         }
-        else if (currentNode->next)
-        {
-            currentNode = currentNode->next;
-        }
+
+        currentNode = currentNode->next;
     }
 
     return NULL;
