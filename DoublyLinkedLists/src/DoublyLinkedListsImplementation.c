@@ -110,7 +110,7 @@ void DoublyListAddValueBeforeItem(doublyListItem** item, int value)
     }
     else
     {
-        newItem->next = (*item)->prev->next;
+        newItem->next = *item;
         newItem->prev = (*item)->prev;
         newItem->prev->next = newItem;
         (*item)->prev = newItem;
