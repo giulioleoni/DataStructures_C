@@ -62,11 +62,11 @@ listItem* ListAppend(listItem** head, int value)
     return item;
 }
 
-int ListRemoveValue(listItem** head, int value)
+void ListRemoveValue(listItem** head, int value)
 {
     if (!*head)
     {
-        return -1;
+        return;
     }   
         
     listItem* itemToRemove = NULL;
@@ -76,7 +76,7 @@ int ListRemoveValue(listItem** head, int value)
         itemToRemove = *head;
         *head = (*head)->next;
         free(itemToRemove);
-        return 0;
+        return;
     }
 
     if ((*head)->next)
@@ -88,20 +88,15 @@ int ListRemoveValue(listItem** head, int value)
             currentItem = currentItem->next;
             if (!currentItem->next)
             {
-                return -1;
+                return;
             }
         }    
 
         itemToRemove = currentItem->next;
         currentItem->next = currentItem->next->next;
         free(itemToRemove);
-        return 0;
     }
-    
-    return -1;
 }
-
-
 
 void ListReverse(listItem** head)
 {

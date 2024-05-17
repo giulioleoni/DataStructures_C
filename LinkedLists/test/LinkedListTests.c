@@ -70,9 +70,12 @@ CLOVE_TEST(RemoveValueWhichIsNotInTheList)
     ListAppend(&head, 20);
     ListAppend(&head, 30);
 
-    int removed = ListRemoveValue(&head, 3);
+    ListRemoveValue(&head, 3);
 
-    CLOVE_INT_EQ(-1, removed);
+    // list won't change
+    CLOVE_INT_EQ(10, head->value);
+    CLOVE_INT_EQ(20, head->next->value);
+    CLOVE_INT_EQ(30, head->next->next->value);
 
     FreeListMemory(&head);
 }
@@ -84,9 +87,8 @@ CLOVE_TEST(RemoveHead)
     ListAppend(&head, 20);
     ListAppend(&head, 30);
 
-    int removedResult = ListRemoveValue(&head, head->value);
+    ListRemoveValue(&head, head->value);
 
-    CLOVE_INT_EQ(0, removedResult);
     CLOVE_INT_EQ(20, head->value);
 
     FreeListMemory(&head);
@@ -99,9 +101,8 @@ CLOVE_TEST(RemoveValueInsideList)
     ListAppend(&head, 20);
     ListAppend(&head, 30);
 
-    int removedResult = ListRemoveValue(&head, head->next->value);
+    ListRemoveValue(&head, head->next->value);
 
-    CLOVE_INT_EQ(0, removedResult);
     CLOVE_INT_EQ(30, head->next->value);
 
     FreeListMemory(&head);
@@ -114,9 +115,8 @@ CLOVE_TEST(RemoveLastValue)
     ListAppend(&head, 20);
     ListAppend(&head, 30);
 
-    int removedResult = ListRemoveValue(&head, head->next->next->value);
+    ListRemoveValue(&head, head->next->next->value);
 
-    CLOVE_INT_EQ(0, removedResult);
     CLOVE_NULL(head->next->next);
 
     FreeListMemory(&head);

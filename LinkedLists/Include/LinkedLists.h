@@ -11,7 +11,7 @@ typedef struct listItem
 
 
 
-int ListRemoveValue(listItem** head, int value);
+void ListRemoveValue(listItem** head, int value);
 listItem* ListAppend(listItem** head, int value);
 listItem* ListGetTail(listItem* head);
 void PrintList(listItem* head);

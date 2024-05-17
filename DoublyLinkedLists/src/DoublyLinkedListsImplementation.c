@@ -158,18 +158,16 @@ void DoublyListRemoveItem(doublyListItem** head, doublyListItem* item)
     free(item);
 }
 
-int DoublyListRemoveValue(doublyListItem** head, int value)
+void DoublyListRemoveValue(doublyListItem** head, int value)
 {
     if (!*head)
     {
-        return -1;
+        return;
     }   
     
     doublyListItem* toRemove = DoublyListFindItem(*head, value);
 
     DoublyListRemoveItem(head, toRemove);
-
-    return toRemove != NULL ? 0 : -1;
 }
 
 

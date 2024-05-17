@@ -73,9 +73,12 @@ CLOVE_TEST(RemoveElementNotInTheDoublyList)
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
 
-    int removeResult = DoublyListRemoveValue(&head, 1234);
+    DoublyListRemoveValue(&head, 1234);
 
-    CLOVE_INT_EQ(-1, removeResult);
+    // list won't change
+    CLOVE_INT_EQ(10, head->value);
+    CLOVE_INT_EQ(20, head->next->value);
+    CLOVE_INT_EQ(30, head->next->next->value);
 
     FreeDoublyListMemory(&head);
 }
@@ -87,9 +90,8 @@ CLOVE_TEST(RemoveHeadOfTheDoublyList)
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
 
-    int removeResult = DoublyListRemoveValue(&head, 10);
+    DoublyListRemoveValue(&head, 10);
     
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_INT_EQ(20, head->value);
     CLOVE_NULL(head->prev);
 
@@ -103,9 +105,8 @@ CLOVE_TEST(RemoveElementInsideTheDoublyList)
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
 
-    int removeResult = DoublyListRemoveValue(&head, 20);
+    DoublyListRemoveValue(&head, 20);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_PTR_EQ(head->next->prev, head);
     CLOVE_INT_EQ(30, head->next->value);
 
@@ -119,9 +120,8 @@ CLOVE_TEST(RemoveLastElementOfTheDoublyList)
     DoublyListAppend(&head, 20);
     DoublyListAppend(&head, 30);
 
-    int removeResult = DoublyListRemoveValue(&head, 30);
+    DoublyListRemoveValue(&head, 30);
 
-    CLOVE_INT_EQ(0, removeResult);
     CLOVE_NULL(head->next->next);
 
     FreeDoublyListMemory(&head);
