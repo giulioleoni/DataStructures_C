@@ -100,8 +100,6 @@ int DictAddKey(struct dictTable** table, const char* key, void* value)
     (*table)->collisions_count++;
     if ((*table)->collisions_count >= (*table)->max_collisions)
     {
-        printf("rehash iniziato alla key %s\n", newItem->key);
-        printf("table dimension %zu\n", (*table)->hashmapSize);
         DictRehash(table);
     }
 
@@ -182,24 +180,19 @@ void DictRemoveKey(struct dictTable* table, const char* key)
 void DictRehash(dictTable** table)
 {
     dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
-    printf("new table dimension %zu\n", new_table->hashmapSize);
 
     for (size_t i = 0; i < (*table)->hashmapSize; i++)
     {
         dictNode* current_node = (*table)->nodes[i];
         while(current_node)
         {
-            printf("%s\n", current_node->key);
             DictAddKey(&new_table, current_node->key, current_node->value);
             current_node = current_node->next;
         }
     }
 
     dictTable* old_table = *table;
-    printf("old table dimension %zu\n", old_table->hashmapSize);
     *table = new_table;
-    printf("new table dimension %zu\n", (*table)->hashmapSize);
     free(old_table);
-    printf("rehash finito\n");
     return;
 }
