@@ -23,7 +23,7 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
     const char* string0 = "Word";
     int value0 = 1;
 
-    DictAddKey(table, string0, &value0);
+    DictAddKey(&table, string0, &value0);
 
     CLOVE_STRING_EQ(string0, table->nodes[3]->key);
     CLOVE_INT_EQ(value0, *(int*)table->nodes[3]->value);
@@ -42,9 +42,9 @@ CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     CLOVE_STRING_EQ(string2, table->nodes[1]->next->key);
     CLOVE_INT_EQ(value2, *(int*)table->nodes[1]->next->value);
@@ -67,10 +67,10 @@ CLOVE_TEST(AddAnExistingKey)
     int value3 = 3;
     int value4 = 4;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
-    int addResult = DictAddKey(table, string4, &value4);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
+    int addResult = DictAddKey(&table, string4, &value4);
 
     CLOVE_INT_EQ(-2, addResult);
 }
@@ -87,9 +87,9 @@ CLOVE_TEST(DictionaryContainsKey)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     dictNode* nodeToCheck = DictContainsKey(table, string2);
 
@@ -108,9 +108,9 @@ CLOVE_TEST(DictionaryNotContainsKey)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     dictNode* nodeToCheck = DictContainsKey(table, "pasta");
 
@@ -124,7 +124,7 @@ CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
     const char* string0 = "Word";
     int value0 = 1;
 
-    DictAddKey(table, string0, &value0);
+    DictAddKey(&table, string0, &value0);
 
     DictRemoveKey(table, string0);
     
@@ -144,9 +144,9 @@ CLOVE_TEST(RemovingKeyInsideDictionary)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     DictRemoveKey(table, string2);
 
@@ -167,9 +167,9 @@ CLOVE_TEST(RemovingKeyHeadOfList)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     DictRemoveKey(table, string1);
 
@@ -189,12 +189,40 @@ CLOVE_TEST(RemovingKeyAtEndOfList)
     int value2 = 2;
     int value3 = 3;
 
-    DictAddKey(table, string1, &value1);
-    DictAddKey(table, string2, &value2);
-    DictAddKey(table, string3, &value3);
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
 
     DictRemoveKey(table, string3);
 
     CLOVE_NULL(table->nodes[1]->next->next);
 }
 
+CLOVE_TEST(Rehash)
+{
+    dictTable* table = NewDictTable(6);
+
+    const char* string1 = "abc";
+    const char* string2 = "AAAAAA";
+    const char* string3 = "pizza";
+    const char* string4 = "developer";
+    const char* string5 = "pasta";
+    const char* string6 = "printer";
+
+    int value1 = 1;
+    int value2 = 2;
+    int value3 = 3;
+    int value4 = 4;
+    int value5 = 5;
+    int value6 = 6;
+
+    DictAddKey(&table, string1, &value1);
+    DictAddKey(&table, string2, &value2);
+    DictAddKey(&table, string3, &value3);
+    DictAddKey(&table, string4, &value4);
+    DictAddKey(&table, string5, &value5);
+    DictAddKey(&table, string6, &value6);
+
+    CLOVE_NOT_NULL(table);
+    CLOVE_INT_EQ(12, table->hashmapSize);
+}

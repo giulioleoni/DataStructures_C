@@ -27,6 +27,8 @@ dictTable* NewDictTable(const size_t hashmapSize)
     }
 
     table->hashmapSize = hashmapSize;
+    table->max_collisions = 3;
+    table->collisions_count = 0;
     table->nodes = calloc(table->hashmapSize, sizeof(struct dictNode*));
 
     if (!table->nodes)
@@ -39,28 +41,28 @@ dictTable* NewDictTable(const size_t hashmapSize)
 
 
 
-int DictAddKey(struct dictTable* table, const char* key, void* value)
+int DictAddKey(struct dictTable** table, const char* key, void* value)
 {
     const size_t keyLen = strlen(key);
     const size_t hash = HashDJB33X(key, keyLen);
-    const size_t index = hash % table->hashmapSize;
+    const size_t index = hash % (*table)->hashmapSize;
 
-    struct dictNode* head = table->nodes[index];
+    struct dictNode* head = (*table)->nodes[index];
 
     if (!head)
     {
-        table->nodes[index] = malloc(sizeof(struct dictNode));
+        (*table)->nodes[index] = malloc(sizeof(struct dictNode));
 
-        if (!table->nodes[index])
+        if (!(*table)->nodes[index])
         {
             return -1;
         }
 
-        table->nodes[index]->key = key;
-        table->nodes[index]->keyLen = keyLen;
-        table->nodes[index]->next = NULL;
-        table->nodes[index]->prev = NULL;
-        table->nodes[index]->value = value;
+        (*table)->nodes[index]->key = key;
+        (*table)->nodes[index]->keyLen = keyLen;
+        (*table)->nodes[index]->next = NULL;
+        (*table)->nodes[index]->prev = NULL;
+        (*table)->nodes[index]->value = value;
 
         return 0; 
     }
@@ -93,6 +95,16 @@ int DictAddKey(struct dictTable* table, const char* key, void* value)
 
     tail->next = newItem;
     newItem->prev = tail;
+
+    // collision
+    (*table)->collisions_count++;
+    if ((*table)->collisions_count >= (*table)->max_collisions)
+    {
+        printf("rehash iniziato alla key %s\n", newItem->key);
+        printf("table dimension %zu\n", (*table)->hashmapSize);
+        DictRehash(table);
+    }
+
     return 0;
 }
 
@@ -167,6 +179,27 @@ void DictRemoveKey(struct dictTable* table, const char* key)
     }
 }
 
+void DictRehash(dictTable** table)
+{
+    dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
+    printf("new table dimension %zu\n", new_table->hashmapSize);
 
+    for (size_t i = 0; i < (*table)->hashmapSize; i++)
+    {
+        dictNode* current_node = (*table)->nodes[i];
+        while(current_node)
+        {
+            printf("%s\n", current_node->key);
+            DictAddKey(&new_table, current_node->key, current_node->value);
+            current_node = current_node->next;
+        }
+    }
 
-
+    dictTable* old_table = *table;
+    printf("old table dimension %zu\n", old_table->hashmapSize);
+    *table = new_table;
+    printf("new table dimension %zu\n", (*table)->hashmapSize);
+    free(old_table);
+    printf("rehash finito\n");
+    return;
+}
