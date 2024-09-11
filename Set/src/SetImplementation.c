@@ -153,5 +153,33 @@ void SetRemove(struct setTable* table, const char* key)
             return;
         }
     }
+}
 
+
+void FreeSetNodesMemory(setNode** head)
+{
+    if (!(*head))
+    {
+        return;
+    }
+
+   setNode* currentNode = *head;
+
+    while (currentNode->next != NULL)
+    {
+        currentNode = currentNode->next;
+        free(currentNode->prev);
+    }
+
+    free(currentNode);
+}
+
+void FreeSetTable(setTable** table)
+{
+    for (size_t i = 0; i < (*table)->hashmapSize; i++)
+    {
+        FreeSetNodesMemory(&((*table)->nodes[i]));
+    }
+
+    free(*table);
 }

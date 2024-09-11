@@ -27,6 +27,8 @@ setTable* NewSetTable(const size_t hashmapSize);
 int SetInsert(struct setTable* table, const char* key);
 setNode* SetSearch(struct setTable* table, const char* key);
 void SetRemove(struct setTable* table, const char* key);
+void FreeSetNodesMemory(setNode** head);
+void FreeSetTable(setTable** table);
 
 
 #endif

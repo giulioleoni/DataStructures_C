@@ -199,7 +199,36 @@ void DictRecreateTable(dictTable** table)
 
     dictTable* old_table = *table;
     *table = new_table;
-    free(old_table->nodes);
-    free(old_table);
+
+    FreeDictTable(&old_table);
     return;
+}
+
+
+void FreeDictNodesMemory(dictNode** head)
+{
+    if (!(*head))
+    {
+        return;
+    }
+
+   dictNode* currentNode = *head;
+
+    while (currentNode->next != NULL)
+    {
+        currentNode = currentNode->next;
+        free(currentNode->prev);
+    }
+
+    free(currentNode);
+}
+
+void FreeDictTable(dictTable** table)
+{
+    for (size_t i = 0; i < (*table)->hashmapSize; i++)
+    {
+        FreeDictNodesMemory(&((*table)->nodes[i]));
+    }
+
+    free(*table);
 }

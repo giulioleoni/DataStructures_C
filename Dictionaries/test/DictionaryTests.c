@@ -7,6 +7,7 @@ CLOVE_TEST(CreateNewDictTable)
     dictTable* table = NewDictTable(4);
 
     CLOVE_NOT_NULL(table);
+    free(table);
 }
 
 CLOVE_TEST(CreateNewDictTableWhitNegativeSize)
@@ -27,6 +28,7 @@ CLOVE_TEST(AddOneKeyValuePairToNewDictTable)
 
     CLOVE_STRING_EQ(string0, table->nodes[3]->key);
     CLOVE_INT_EQ(value0, *(int*)table->nodes[3]->value);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
@@ -51,6 +53,7 @@ CLOVE_TEST(AddMoreKeyValuePairAfterAnExistingElement)
 
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->next->key);
     CLOVE_INT_EQ(value3, *(int*)table->nodes[1]->next->next->value);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(AddAnExistingKey)
@@ -73,6 +76,7 @@ CLOVE_TEST(AddAnExistingKey)
     int addResult = DictAddKey(&table, string4, &value4);
 
     CLOVE_INT_EQ(-2, addResult);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(DictionaryContainsKey)
@@ -94,6 +98,7 @@ CLOVE_TEST(DictionaryContainsKey)
     dictNode* nodeToCheck = DictContainsKey(table, string2);
 
     CLOVE_NOT_NULL(nodeToCheck);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(DictionaryNotContainsKey)
@@ -115,6 +120,7 @@ CLOVE_TEST(DictionaryNotContainsKey)
     dictNode* nodeToCheck = DictContainsKey(table, "pasta");
 
     CLOVE_NULL(nodeToCheck);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
@@ -129,6 +135,7 @@ CLOVE_TEST(RemovingKeyWhichIsTheOnlyElement)
     DictRemoveKey(table, string0);
     
     CLOVE_NULL(table->nodes[3]);
+    free(table);
 }
 
 CLOVE_TEST(RemovingKeyInsideDictionary)
@@ -152,6 +159,7 @@ CLOVE_TEST(RemovingKeyInsideDictionary)
 
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
     CLOVE_INT_EQ(value3, *(int*)table->nodes[1]->next->value);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(RemovingKeyHeadOfList)
@@ -174,6 +182,7 @@ CLOVE_TEST(RemovingKeyHeadOfList)
     DictRemoveKey(table, string1);
 
     CLOVE_STRING_EQ(string2, table->nodes[1]->key);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(RemovingKeyAtEndOfList)
@@ -196,6 +205,7 @@ CLOVE_TEST(RemovingKeyAtEndOfList)
     DictRemoveKey(table, string3);
 
     CLOVE_NULL(table->nodes[1]->next->next);
+    FreeDictTable(&table);
 }
 
 CLOVE_TEST(RecreateTable)
@@ -225,4 +235,5 @@ CLOVE_TEST(RecreateTable)
 
     CLOVE_NOT_NULL(table);
     CLOVE_INT_EQ(12, table->hashmapSize);
+    FreeDictTable(&table);
 }

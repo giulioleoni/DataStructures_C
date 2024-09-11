@@ -7,6 +7,7 @@ CLOVE_TEST(CreateNewSetTable)
     setTable* table = NewSetTable(4);
 
     CLOVE_NOT_NULL(table);
+    free(table);
 }
 
 CLOVE_TEST(CreateNewSetTableWhitNegativeSize)
@@ -25,6 +26,7 @@ CLOVE_TEST(AddOneKeyToNewSet)
     SetInsert(table, string0);
 
     CLOVE_STRING_EQ(string0, table->nodes[3]->key);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(AddMoreKeyToNewSet)
@@ -41,6 +43,7 @@ CLOVE_TEST(AddMoreKeyToNewSet)
 
     CLOVE_STRING_EQ(string2, table->nodes[1]->next->key);
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->next->key);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(AddAnExistingKey)
@@ -58,6 +61,7 @@ CLOVE_TEST(AddAnExistingKey)
     int insertResult = SetInsert(table, string4);
 
     CLOVE_INT_EQ(-2, insertResult);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(SetSearchAnExistingKey)
@@ -74,6 +78,7 @@ CLOVE_TEST(SetSearchAnExistingKey)
 
     setNode* nodeToCheck = SetSearch(table, string2);
     CLOVE_NOT_NULL(nodeToCheck);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(SetSearchANotExistingKey)
@@ -90,6 +95,7 @@ CLOVE_TEST(SetSearchANotExistingKey)
 
     setNode* nodeToCheck = SetSearch(table, "dnjsnc");
     CLOVE_NULL(nodeToCheck);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
@@ -103,6 +109,7 @@ CLOVE_TEST(RemovingTheOnlyElementOfTheSet)
     SetRemove(table, string0);
 
     CLOVE_NULL(table->nodes[3]);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(RemovingElementInsideSet)
@@ -121,6 +128,7 @@ CLOVE_TEST(RemovingElementInsideSet)
     SetRemove(table, string2);
     
     CLOVE_STRING_EQ(string3, table->nodes[1]->next->key);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(RemovingHeadOfSet)
@@ -139,6 +147,7 @@ CLOVE_TEST(RemovingHeadOfSet)
     SetRemove(table, string1);
     
     CLOVE_STRING_EQ(string2, table->nodes[1]->key);
+    FreeSetTable(&table);
 }
 
 CLOVE_TEST(RemovingLastSetElement)
@@ -157,4 +166,5 @@ CLOVE_TEST(RemovingLastSetElement)
     SetRemove(table, string3);
 
     CLOVE_NULL(table->nodes[1]->next->next);
+    FreeSetTable(&table);
 }
