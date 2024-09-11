@@ -2,7 +2,9 @@
  
 This repo contains C language implementation of 4 common data structures as well as tests to check functionality.
 
-The single-header library [clove unit](https://github.com/fdefelici/clove-unit) was used to write the tests.
+The single-header library [clove unit](https://github.com/fdefelici/clove-unit), which can be found in the include directory, was used to write the tests.
+
+In each directory there is a .bat file that is used to compile, it will create the bin directory where you will find the executable that will run the tests.
 
 ## LinkedLists and DoublyLinkedLists
 
@@ -17,10 +19,13 @@ The most complicated part for me was implementing removal in the linked lists, s
 ![photo_2_2024-09-11_16-12-52](https://github.com/user-attachments/assets/657f1b00-dbeb-4fc4-92c1-416cbc37b5be)
 
 
-Instead, in double-linked lists, I was able to split the removal of an item into two steps, search and removal, without having to do two loops
+Instead, in double-linked lists, I was able to split the removal of an item into two steps, search and remove, without having to do two loops
 
 
 ![photo_1_2024-09-11_16-12-52](https://github.com/user-attachments/assets/c3a18d16-ec34-405e-9f60-46d0c62efdec)
+
+
+
 
 ## Sets and Dictionaries
 
@@ -37,7 +42,9 @@ I used two structs, one to represent the table and one to represent the single e
 
 In the case the hashing algorithm gives an equal value for two keys (a collision), the second one will be added at the end of the previous node, as if it were a list.
 
-Initially I thought of handling the nodes as elements of a linked list, but I found it difficult to implement the removal, so I decided to make them nodes of a doubly linked list.
+![Screenshot 2024-09-11 181549](https://github.com/user-attachments/assets/e8da71c4-70c3-4a9b-a09c-a9f554680d5f)
+
+Initially I thought of handling the nodes, of both sets and dictionaries, as elements of a linked list, but I found it difficult to implement the removal, so I decided to make them nodes of a doubly linked list.
 
 The Dictionary table takes into account the number of collisions because if they become too many, and the list becomes too large, it will have to recreate the table with increased capacity and rehash all the elements.
 
