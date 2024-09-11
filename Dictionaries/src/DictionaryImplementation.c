@@ -199,6 +199,7 @@ void DictRecreateTable(dictTable** table)
 
     dictTable* old_table = *table;
     *table = new_table;
+    free(old_table->nodes);
     free(old_table);
     return;
 }
