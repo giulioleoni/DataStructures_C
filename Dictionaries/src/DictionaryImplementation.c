@@ -100,7 +100,8 @@ int DictAddKey(struct dictTable** table, const char* key, void* value)
     (*table)->collisions_count++;
     if ((*table)->collisions_count >= (*table)->max_collisions)
     {
-        DictRehash(table);
+        //DictRehash(table);
+        DictRecreateTable(table);
     }
 
     return 0;
@@ -179,17 +180,29 @@ void DictRemoveKey(struct dictTable* table, const char* key)
 
 void DictRehash(dictTable** table)
 {
-    dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
+    // dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
 
     for (size_t i = 0; i < (*table)->hashmapSize; i++)
     {
         dictNode* current_node = (*table)->nodes[i];
         while(current_node)
         {
-            DictAddKey(&new_table, current_node->key, current_node->value);
+            DictAddKey(table, current_node->key, current_node->value);
             current_node = current_node->next;
         }
     }
+
+    // dictTable* old_table = *table;
+    // *table = new_table;
+    // free(old_table);
+    // return;
+}
+
+void DictRecreateTable(dictTable **table)
+{
+    dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
+
+    DictRehash(&new_table);
 
     dictTable* old_table = *table;
     *table = new_table;

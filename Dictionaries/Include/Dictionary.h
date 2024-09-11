@@ -12,8 +12,6 @@ typedef struct dictTable
     size_t collisions_count;
 } dictTable;
 
-
-
 typedef struct dictNode
 {
     const char* key;
@@ -31,6 +29,7 @@ int DictAddKey(struct dictTable** table, const char* key, void* value);
 dictNode* DictContainsKey(struct dictTable* table, const char* key);
 void DictRemoveKey(struct dictTable* table, const char* key);
 void DictRehash(struct dictTable** table);
+void DictRecreateTable(struct dictTable** table);
 
 
 #endif
