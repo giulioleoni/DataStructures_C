@@ -191,7 +191,7 @@ void DictRehash(dictTable** table)
     }
 }
 
-void DictRecreateTable(dictTable **table)
+void DictRecreateTable(dictTable** table)
 {
     dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
 
