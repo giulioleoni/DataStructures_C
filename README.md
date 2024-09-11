@@ -37,14 +37,15 @@ I used two structs, one to represent the table and one to represent the single e
 
 In the case the hashing algorithm gives an equal value for two keys (a collision), the second one will be added at the end of the previous node, as if it were a list.
 
-I used doubly linked lists because they facilitate removal
+Initially I thought of handling the nodes as elements of a linked list, but I found it difficult to implement the removal, so I decided to make them nodes of a doubly linked list.
 
-The Dictionary table takes into account the number of collisions because if they become too many, and the list becomes too large, it will have to regenerate the table with increased capacity and rehash all the elements
+The Dictionary table takes into account the number of collisions because if they become too many, and the list becomes too large, it will have to recreate the table with increased capacity and rehash all the elements.
 
+Inside the function that adds an element to the dictionary:
 
+![photo_2_2024-09-11_16-49-25](https://github.com/user-attachments/assets/c57463da-f57e-4e81-b191-a4479fbf1c0b)
 
-
-
+![recreate](https://github.com/user-attachments/assets/95fafa32-af3c-4574-ab28-4b8854034a69)
 
 
 
