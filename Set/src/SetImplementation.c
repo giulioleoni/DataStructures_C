@@ -78,6 +78,7 @@ int SetInsert(struct setTable* table, const char* key)
     {
         if (newItem->keyLen == head->keyLen && !memcmp(head->key, newItem->key, keyLen))
         {
+            // already existing key
             free(newItem);
             return -2;
         }
