@@ -198,7 +198,7 @@ CLOVE_TEST(RemovingKeyAtEndOfList)
     CLOVE_NULL(table->nodes[1]->next->next);
 }
 
-CLOVE_TEST(Rehash)
+CLOVE_TEST(RecreateTable)
 {
     dictTable* table = NewDictTable(6);
 

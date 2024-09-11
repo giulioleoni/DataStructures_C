@@ -180,8 +180,6 @@ void DictRemoveKey(struct dictTable* table, const char* key)
 
 void DictRehash(dictTable** table)
 {
-    // dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
-
     for (size_t i = 0; i < (*table)->hashmapSize; i++)
     {
         dictNode* current_node = (*table)->nodes[i];
@@ -191,11 +189,6 @@ void DictRehash(dictTable** table)
             current_node = current_node->next;
         }
     }
-
-    // dictTable* old_table = *table;
-    // *table = new_table;
-    // free(old_table);
-    // return;
 }
 
 void DictRecreateTable(dictTable **table)
