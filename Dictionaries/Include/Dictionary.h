@@ -23,7 +23,7 @@ typedef struct dictNode
 
 
 
-size_t HashDJB33X(const char* key, const size_t keylen);
+size_t HashDJB33X(const char* key, const size_t keyLen);
 dictTable* NewDictTable(const size_t hashmapSize);
 int DictAddKey(struct dictTable** table, const char* key, void* value);
 dictNode* DictContainsKey(struct dictTable* table, const char* key);
