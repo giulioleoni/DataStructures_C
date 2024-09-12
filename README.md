@@ -56,9 +56,16 @@ Inside the function that adds an element to the dictionary:
 ![recreate](https://github.com/user-attachments/assets/95fafa32-af3c-4574-ab28-4b8854034a69)
 
 
+## Tests
+
+Sample of a test:
+
+![test](https://github.com/user-attachments/assets/b5b8a16f-e7d9-4d0b-b9a3-62b21fb014f7)
 
 
+To check that the item has been removed correctly I check that the head->next has changed.
 
+Other tests might check the return value of the function.
 
 
 
