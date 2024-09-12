@@ -33,8 +33,8 @@ Sets and Dictionaries are implemented using a hashtable.
 
 The hash function used is very simple:
 
+![hashnuovo](https://github.com/user-attachments/assets/890729d8-aa63-4539-98b9-76342e290f45)
 
-![hash](https://github.com/user-attachments/assets/32702528-d57b-49b6-b50a-01f47e0ce646)
 
 I used two structs, one to represent the table and one to represent the single element (node)  
 
@@ -50,7 +50,8 @@ The Dictionary table takes into account the number of collisions because if they
 
 Inside the function that adds an element to the dictionary:
 
-![photo_2_2024-09-11_16-49-25](https://github.com/user-attachments/assets/c57463da-f57e-4e81-b191-a4479fbf1c0b)
+![Screenshot 2024-09-12 173254](https://github.com/user-attachments/assets/80b5f14d-ae32-4471-a471-12471fc80ebd)
+
 
 ![recreate](https://github.com/user-attachments/assets/95fafa32-af3c-4574-ab28-4b8854034a69)
 
