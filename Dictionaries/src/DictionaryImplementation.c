@@ -177,24 +177,21 @@ void DictRemoveKey(struct dictTable* table, const char* key)
     }
 }
 
-void DictRehash(dictTable** table)
-{
-    for (size_t i = 0; i < (*table)->hashmapSize; i++)
-    {
-        dictNode* current_node = (*table)->nodes[i];
-        while(current_node)
-        {
-            DictAddKey(table, current_node->key, current_node->value);
-            current_node = current_node->next;
-        }
-    }
-}
-
 void DictRecreateTable(dictTable** table)
 {
     dictTable* new_table = NewDictTable((*table)->hashmapSize * 2);
 
-    DictRehash(&new_table);
+    // rehash
+    for (size_t i = 0; i < (*table)->hashmapSize; i++)
+    {
+        dictNode* current_node = (*table)->nodes[i];
+       
+        while(current_node)
+        {
+            DictAddKey(&new_table, current_node->key, current_node->value);
+            current_node = current_node->next;
+        }
+    }
 
     dictTable* old_table = *table;
     *table = new_table;

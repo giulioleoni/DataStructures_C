@@ -28,7 +28,6 @@ dictTable* NewDictTable(const size_t hashmapSize);
 int DictAddKey(struct dictTable** table, const char* key, void* value);
 dictNode* DictContainsKey(struct dictTable* table, const char* key);
 void DictRemoveKey(struct dictTable* table, const char* key);
-void DictRehash(struct dictTable** table);
 void DictRecreateTable(struct dictTable** table);
 void FreeDictNodesMemory(dictNode** head);
 void FreeDictTable(dictTable** table);

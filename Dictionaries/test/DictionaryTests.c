@@ -235,5 +235,12 @@ CLOVE_TEST(RecreateTable)
 
     CLOVE_NOT_NULL(table);
     CLOVE_INT_EQ(12, table->hashmapSize);
+    CLOVE_STRING_EQ("abc", DictContainsKey(table, "abc")->key);
+    CLOVE_STRING_EQ("AAAAAA", DictContainsKey(table, "AAAAAA")->key);
+    CLOVE_STRING_EQ("pizza", DictContainsKey(table, "pizza")->key);
+    CLOVE_STRING_EQ("developer", DictContainsKey(table, "developer")->key);
+    CLOVE_STRING_EQ("pasta", DictContainsKey(table, "pasta")->key);
+    CLOVE_STRING_EQ("printer", DictContainsKey(table, "printer")->key);
+    
     FreeDictTable(&table);
 }
