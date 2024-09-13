@@ -73,6 +73,7 @@ void ListRemoveValue(listItem** head, int value)
 
     if ((*head)->value == value)
     {
+        // head is the item to remove
         itemToRemove = *head;
         *head = (*head)->next;
         free(itemToRemove);
