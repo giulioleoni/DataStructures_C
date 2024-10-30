@@ -1,6 +1,6 @@
 # DataStructures
 
-This project was done to understand how data structures work, so as to use them in the most efficient way.
+This project was done to understand how **data structures** work, so as to use them in the most efficient way.
 
 This repo contains C language implementation of 4 common data structures as well as tests to check functionality.
 
