@@ -2,7 +2,7 @@
 
 This project was done to understand how **data structures** work, so as to use them in the most efficient way.
 
-This repo contains C language implementation of 4 common data structures as well as tests to check functionality.
+This repo contains the C language implementation of 4 common data structures as well as tests to check their functionality.
 
 The single-header library [clove unit](https://github.com/fdefelici/clove-unit), which can be found in the include directory, was used to write the tests.
 
