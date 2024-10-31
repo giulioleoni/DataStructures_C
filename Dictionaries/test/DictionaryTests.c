@@ -98,6 +98,8 @@ CLOVE_TEST(DictionaryContainsKey)
     dictNode* nodeToCheck = DictContainsKey(table, string2);
 
     CLOVE_NOT_NULL(nodeToCheck);
+    CLOVE_STRING_EQ(string2, nodeToCheck->key);
+    CLOVE_INT_EQ(value2, *(int*)nodeToCheck->value);
     FreeDictTable(&table);
 }
 

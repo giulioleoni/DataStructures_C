@@ -78,6 +78,7 @@ CLOVE_TEST(SetSearchAnExistingKey)
 
     setNode* nodeToCheck = SetSearch(table, string2);
     CLOVE_NOT_NULL(nodeToCheck);
+    CLOVE_STRING_EQ(string2, nodeToCheck->key);
     FreeSetTable(&table);
 }
 
