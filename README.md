@@ -2,9 +2,9 @@
 
 This project was done to understand how **data structures** work, so as to use them in the most efficient way.
 
-This repo contains the C language implementation of 4 common data structures as well as tests to check their functionality.
+This repo contains the C language implementation of 4 common data structures as well as unit tests to check their functionality.
 
-The single-header library [clove unit](https://github.com/fdefelici/clove-unit), which can be found in the include directory, was used to write the tests.
+The single-header library [clove unit](https://github.com/fdefelici/clove-unit), which can be found in the include directory, was used to write the unit tests.
 
 In each directory there is a .bat file that is used to compile, it will create the bin directory where you will find the executable that will run the tests.
 
@@ -69,9 +69,21 @@ typedef struct doublyListItem
 } doublyListItem;
 ```
 
+To create a new linked list or doubly linked list I simply create a null head and then add the elements to it:
+``` c   
+CLOVE_TEST(CreateListHeadWithAppend)
+{
+    listItem* head = NULL;
+    ListAppend(&head, 10);
+    CLOVE_NOT_NULL(head);
+    CLOVE_INT_EQ(10, head->value);
+
+    FreeListMemory(&head);
+}
+```
 
 
-The most complicated part for me was implementing removal in the linked lists, since I only know the next element and not the previous one, so I thought of making a loop that always look one position ahead 
+The most complicated part for me was implementing removal in the linked lists, since I only know the next element and not the previous one, so I thought of making a loop that always look one position ahead: 
 
 ```c
 void ListRemoveValue(listItem** head, int value)
@@ -112,7 +124,7 @@ void ListRemoveValue(listItem** head, int value)
 }
 ```
 
-Instead, in double-linked lists, I was able to split the removal of an item into two steps, search and remove, without having to do two loops
+Instead, in doubly linked lists, I was able to split the removal of an item into two steps, search and remove, without having to do two loops
 
 ``` c                                                                        
 void DoublyListRemoveValue(doublyListItem** head, int value)
