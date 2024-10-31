@@ -8,7 +8,48 @@ The single-header library [clove unit](https://github.com/fdefelici/clove-unit),
 
 In each directory there is a .bat file that is used to compile, it will create the bin directory where you will find the executable that will run the tests.
 
-## LinkedLists and DoublyLinkedLists
+
+## Implemented functionalities
+
+- Linked Lists
+    - Get last item of the list
+    - Append item
+    - Remove value
+    - Reverse list
+
+
+ 
+ - Doubly Linked Lists
+    - Get last item of the list
+    - Append item
+    - Remove value
+    - Remove Item
+    - Find item
+    - Add value before a specified item
+    - Add value after a specified item
+  
+      
+ 
+ - Sets
+    - Create new set table
+    - Insert a value
+    - Search value
+    - Remove value
+
+
+   
+
+- Dictionaries
+    - Create new dictionary table
+    - Add key-value pair
+    - Search key-value pair
+    - Remove key-value pair
+    - Rehash table
+
+
+    
+
+## Linked Lists and DoublyLinked Lists
 
 I used a struct to represent che single item of the list (for convenience, I decided to make lists containing integers):
 
